@@ -1,0 +1,55 @@
+Aim :- 
+
+The aim of this visualization is to help learners understand the working of the Binary Search algorithm on a sorted array using intuitive animations and interactive control.
+
+This simulator enables users to:
+
+Visualize how the search range narrows using low, mid, and high pointers.
+Identify how decisions are made to go left or right in the array.
+Interactively control steps and trace the search history.
+Receive audio feedback and real-time updates on search status.
+Learn how binary search achieves O(log n) efficiency.
+
+This is ideal for learners exploring search techniques and optimizing solutions involving sorted data.
+
+Theory:- 
+
+Definition: Binary Search is an efficient searching algorithm used to find a target value in a sorted array by repeatedly dividing the search interval in half.
+
+Working Principle: It compares the target value with the middle element. If it matches, search ends. If the target is smaller, the search continues in the left half; if larger, in the right half.
+
+Precondition: The array must be sorted in ascending or descending order.
+
+Advantages: 
+
+Much faster than linear search for large datasets.
+Time complexity is logarithmic, making it highly efficient.
+
+Disadvantages:
+
+Cannot be applied to unsorted data.
+Requires random access — not suitable for linked lists.
+
+Time Complexity:O(log n)
+
+Space Complexity:O(1) for iterative, O(log n) for recursive implementation.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
