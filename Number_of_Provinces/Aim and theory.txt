@@ -1,0 +1,64 @@
+Aim :-
+
+The aim of this visualization is to help learners understand the working of the Number of Provinces (Connected Components) algorithm using intuitive animations and interactive controls.
+
+This simulator enables users to:
+
+Visualize how DFS or Union-Find explores each node and groups connected cities into provinces.
+Identify how the algorithm marks nodes as visited and traverses all reachable neighbors.
+Interactively control steps and trace the traversal through the adjacency matrix.
+Receive real-time updates on the current province count.
+Learn how connected components are identified in an undirected graph.
+
+This is ideal for learners exploring graph traversal techniques and understanding how connected components work in real-world scenarios like city networks.
+
+Theory:-
+
+Definition: The Number of Provinces problem asks us to find the total number of connected components in an undirected graph. Each city is a node, and a direct connection between two cities is an edge. A province is a group of cities that are directly or indirectly connected.
+
+Working Principle: We iterate over each city. If a city has not been visited, we start a DFS (or BFS) from it, marking all reachable cities as visited. Each time we start a new DFS from an unvisited city, we increment the province count by one.
+
+Precondition: The input is an n x n adjacency matrix isConnected where isConnected[i][j] = 1 means city i and city j are directly connected.
+
+Advantages:
+
+Simple to implement using DFS, BFS, or Union-Find.
+Works efficiently on adjacency matrix representations.
+Union-Find approach provides near-constant time operations with path compression.
+
+Disadvantages:
+
+DFS/BFS on adjacency matrix has O(n^2) time complexity even for sparse graphs.
+Recursive DFS may cause stack overflow for very large inputs.
+
+Time Complexity: O(n^2) where n is the number of cities, since we may visit every cell of the adjacency matrix.
+
+Space Complexity: O(n) for the visited array and recursion stack.
+
+Stable / Not Stable: Not applicable (this is a graph algorithm, not a sorting algorithm).
+
+In-place / Not In-place: Not in-place — requires an additional visited array of size n.
+
+Prerequisites:
+
+Basic understanding of graphs (nodes and edges).
+Familiarity with DFS or BFS traversal.
+Understanding of adjacency matrix representation.
+
+Common Mistakes:
+
+Forgetting to mark a node as visited before recursing, causing infinite loops.
+Confusing directed and undirected graphs — this problem uses an undirected graph.
+Not handling the diagonal (isConnected[i][i] = 1) correctly — a city is always connected to itself.
+
+When to Use:
+
+When you need to count connected components in an undirected graph.
+When the graph is given as an adjacency matrix.
+When solving network connectivity problems.
+
+When Not to Use:
+
+When the graph is directed — connected components work differently for directed graphs.
+When the graph is very large and sparse — an adjacency list would be more memory efficient.
+When you need to find strongly connected components in a directed graph (use Kosaraju's or Tarjan's algorithm instead).

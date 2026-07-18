@@ -1,0 +1,80 @@
+Aim :-
+
+The aim of this visualization is to help learners understand the working of the Range Sum Query — Mutable algorithm using a Fenwick Tree (Binary Indexed Tree / BIT) through intuitive animations and interactive control.
+
+This simulator enables users to:
+
+Visualize how a Fenwick Tree is built from an array using prefix sums.
+Understand how point updates propagate through the BIT using the lowest set bit.
+Observe how range sum queries are answered in O(log n) using prefix sum subtraction.
+Learn how the BIT achieves efficient updates and queries simultaneously.
+Interactively step through build, update, and query operations.
+
+This is ideal for learners exploring range query problems and tree-based data structures.
+
+Theory:-
+
+Definition: Range Sum Query — Mutable is a problem where, given an array, you must efficiently answer queries asking for the sum of elements in a subarray [l, r], and support point updates that change individual elements.
+
+Working Principle: A Fenwick Tree (Binary Indexed Tree) is an array-based structure where each index stores the sum of a range of elements determined by the lowest set bit of that index. This allows prefix sums to be computed and updated in O(log n) by traversing indices using bitwise operations.
+
+Key Operations:
+- update(i, delta): Add delta to index i. Move to the next responsible index using i += i & (-i).
+- prefix_sum(i): Sum from index 1 to i. Move to the parent index using i -= i & (-i).
+- range_sum(l, r): prefix_sum(r) - prefix_sum(l - 1).
+
+Lowest Set Bit: i & (-i) isolates the lowest set bit of i, which determines the range each BIT index is responsible for.
+
+Advantages:
+Simpler and more cache-friendly than a Segment Tree.
+Uses O(n) space with no overhead.
+Both update and query run in O(log n).
+Easy to implement with just two short loops.
+
+Disadvantages:
+Only supports point updates natively (range updates need extra tricks).
+Less flexible than Segment Tree — cannot directly support range minimum/maximum.
+1-indexed by convention, which can cause off-by-one confusion.
+
+Applications:
+Prefix sum queries with dynamic updates.
+Counting inversions in an array.
+Frequency tables in competitive programming.
+
+Real Life Applications:
+Real-time leaderboard score tracking with frequent updates.
+Cumulative sales data with daily updates.
+Event counting systems where counts change over time.
+
+Time Complexity:
+Build: O(n log n) or O(n) with optimized construction.
+Update: O(log n)
+Query: O(log n)
+
+Space Complexity: O(n) for the BIT array.
+
+Stable / Not Stable: Not applicable (not a sorting algorithm).
+
+In-place / Not In-place: Not in-place (requires an auxiliary BIT array).
+
+Prerequisites:
+Basic understanding of arrays and prefix sums.
+Familiarity with bitwise operations (AND, two's complement).
+Understanding of the concept of lowest set bit.
+
+Common Mistakes:
+Using 0-based indexing directly — BIT is 1-indexed, so always shift indices by +1.
+Forgetting to store the delta (difference) instead of the new value during update.
+Confusing update(i, val) with set(i, val) — BIT update adds a delta, not sets a value.
+Not subtracting prefix_sum(l - 1) when computing range sum.
+
+When to Use:
+When you need both point updates and range sum queries efficiently.
+When the array is dynamic and values change frequently.
+When you want a simpler alternative to Segment Tree for sum queries.
+
+When Not to Use:
+When you need range minimum or maximum queries — use Segment Tree instead.
+When the array is static — use a plain prefix sum array for O(1) queries.
+
+For more information visit Codorythm platform.

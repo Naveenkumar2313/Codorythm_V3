@@ -1,0 +1,84 @@
+Aim :-
+
+The aim of this visualization is to help learners understand the working of the Range Update Range Query algorithm using a Segment Tree with Lazy Propagation through intuitive animations and interactive control.
+
+This simulator enables users to:
+
+Visualize how a Segment Tree is built and how lazy tags are stored at each node.
+Understand how range updates are deferred using lazy propagation instead of updating every element immediately.
+Observe how lazy tags are pushed down to children only when needed during queries or further updates.
+Learn how Lazy Propagation achieves O(log n) for both range updates and range queries.
+Interactively step through build, range update, push down, and range query operations.
+
+This is ideal for learners exploring advanced segment tree techniques and range operation problems.
+
+Theory:-
+
+Definition: Range Update Range Query is a problem where, given an array, you must efficiently support two operations — adding a value to all elements in a range [l, r], and querying the sum of all elements in a range [l, r].
+
+Working Principle: A Segment Tree with Lazy Propagation extends the standard Segment Tree by adding a lazy array. Each node stores the sum of its segment. The lazy array stores pending updates that have not yet been pushed to children. When a range update covers a node's segment entirely, the update is stored in the lazy tag instead of propagating immediately. When a query or further update needs to go deeper, the lazy tag is pushed down to children first.
+
+Key Operations:
+- build(arr, node, start, end): Build the segment tree with sum values.
+- push_down(node, start, end): Propagate the lazy tag of a node to its two children, updating their sums and lazy values, then reset the parent's lazy tag to 0.
+- range_update(node, start, end, l, r, val): Add val to all elements in [l, r]. If the segment is fully covered, update the node sum and lazy tag. Otherwise push down and recurse.
+- range_query(node, start, end, l, r): Return the sum of elements in [l, r]. If fully covered, return the node sum. Otherwise push down and recurse on children.
+
+Lazy Tag Meaning: lazy[node] = val means every element in this node's segment still needs val added to it, but the update has not been pushed to children yet.
+
+Push Down Formula:
+- child_sum += lazy[parent] * (number of elements in child segment)
+- child_lazy += lazy[parent]
+- lazy[parent] = 0
+
+Advantages:
+Supports both range updates and range queries in O(log n).
+Avoids redundant updates by deferring work until necessary.
+Can be extended to support range assignment, range multiply, and other operations.
+
+Disadvantages:
+More complex to implement than a basic Segment Tree.
+Push down logic must be carefully handled to avoid incorrect results.
+Debugging lazy propagation bugs can be difficult.
+
+Applications:
+Range addition with range sum queries in competitive programming.
+Interval scheduling with aggregate queries.
+Game development for area-of-effect updates on grid regions.
+
+Real Life Applications:
+Applying a discount to a range of products and querying total price of a range.
+Adding bonus points to a range of players and querying total score of a range.
+Updating temperature readings for a range of sensors and querying average over a range.
+
+Time Complexity:
+Build: O(n)
+Range Update: O(log n)
+Range Query: O(log n)
+
+Space Complexity: O(n) for the segment tree and lazy arrays (typically 4*n allocated).
+
+Stable / Not Stable: Not applicable (not a sorting algorithm).
+
+In-place / Not In-place: Not in-place (requires auxiliary tree and lazy arrays).
+
+Prerequisites:
+Understanding of basic Segment Tree (build, query, point update).
+Familiarity with recursion and tree traversal.
+Understanding of the concept of deferred/lazy computation.
+
+Common Mistakes:
+Forgetting to push down lazy tags before recursing into children during queries or updates.
+Incorrectly computing the child segment sum — must multiply lazy value by the segment length.
+Not resetting the parent lazy tag to 0 after pushing down.
+Applying lazy to a node without updating its sum — both must be updated together.
+
+When to Use:
+When you need both range updates and range queries efficiently.
+When point-by-point updates would be too slow (O(n) per update).
+
+When Not to Use:
+When only point updates are needed — a basic Segment Tree or BIT suffices.
+When the array is static — a plain prefix sum array handles range queries in O(1).
+
+For more information visit Codorythm platform.

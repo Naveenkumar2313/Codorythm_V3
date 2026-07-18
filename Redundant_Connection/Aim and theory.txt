@@ -1,0 +1,65 @@
+Aim :-
+
+The aim of this visualization is to help learners understand the working of the Redundant Connection algorithm using intuitive animations and interactive controls.
+
+This simulator enables users to:
+
+Visualize how Union-Find processes each edge and detects the edge that creates a cycle.
+Identify how the parent and rank arrays are updated as edges are added one by one.
+Interactively control steps and trace the union and find operations on the graph.
+Receive real-time feedback when a redundant edge is detected.
+Learn how cycle detection works in an undirected graph using Union-Find.
+
+This is ideal for learners exploring graph theory and understanding how to detect cycles efficiently using the Disjoint Set Union data structure.
+
+Theory:-
+
+Definition: The Redundant Connection problem asks us to find the last edge in a list of edges that, when added to the graph, creates a cycle. The graph starts as a tree (n nodes, n-1 edges) and one extra edge is added making it have n nodes and n edges. We must return that extra edge.
+
+Working Principle: We process each edge one by one. For each edge (u, v), we use Union-Find to check if u and v already belong to the same connected component. If they do, adding this edge would create a cycle — so this is the redundant edge. If they do not, we union them into the same component and continue.
+
+Precondition: The input is a list of edges where each edge connects two nodes labeled from 1 to n. The graph is undirected. Exactly one redundant edge exists.
+
+Advantages:
+
+Union-Find with path compression and union by rank runs in near O(1) per operation.
+Very efficient for large graphs with many edges.
+Easy to implement and understand.
+
+Disadvantages:
+
+Only works for undirected graphs — directed graphs require a different approach.
+Requires extra space for the parent and rank arrays.
+
+Time Complexity: O(n * alpha(n)) where alpha is the inverse Ackermann function — practically O(n) for all real inputs.
+
+Space Complexity: O(n) for the parent and rank arrays.
+
+Stable / Not Stable: Not applicable (this is a graph algorithm, not a sorting algorithm).
+
+In-place / Not In-place: Not in-place — requires parent and rank arrays of size n+1.
+
+Prerequisites:
+
+Basic understanding of graphs (nodes and edges).
+Understanding of Union-Find (Disjoint Set Union) data structure.
+Familiarity with cycle detection in undirected graphs.
+
+Common Mistakes:
+
+Forgetting to apply path compression in the find operation, making it slow.
+Using 0-indexed nodes when the problem uses 1-indexed nodes — always initialize parent for nodes 1 to n.
+Returning the first cycle-forming edge found instead of the last one — the problem guarantees exactly one redundant edge so the first one found is correct.
+Confusing this problem with directed graph cycle detection — this only applies to undirected graphs.
+
+When to Use:
+
+When you need to detect a cycle in an undirected graph.
+When you need to find the specific edge that causes a cycle.
+When working with problems involving spanning trees and extra edges.
+
+When Not to Use:
+
+When the graph is directed — use DFS-based cycle detection instead.
+When there are multiple redundant edges and you need all of them.
+When the graph has weighted edges and you need minimum spanning tree logic (use Kruskal's algorithm instead).

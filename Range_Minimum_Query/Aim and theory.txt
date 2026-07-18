@@ -1,0 +1,77 @@
+Aim :-
+
+The aim of this visualization is to help learners understand the working of the Range Minimum Query algorithm using a Segment Tree through intuitive animations and interactive control.
+
+This simulator enables users to:
+
+Visualize how a Segment Tree is built from an array.
+Understand how range minimum queries are answered by traversing the tree.
+Observe how point updates propagate through the tree.
+Learn how Segment Tree achieves O(log n) for both queries and updates.
+Interactively step through build, query, and update operations.
+
+This is ideal for learners exploring range query problems and tree-based data structures.
+
+Theory:-
+
+Definition: Range Minimum Query (RMQ) is a problem where, given an array, you must efficiently answer queries asking for the minimum value in a subarray [l, r], and optionally support point updates.
+
+Working Principle: A Segment Tree is a binary tree where each node stores the minimum value of a segment of the array. The root covers the entire array. Each internal node covers the union of its children's segments. A leaf node covers a single element. Queries and updates traverse from root to leaves in O(log n).
+
+Build: Recursively build the tree bottom-up. Each node = min(left child, right child).
+
+Query(l, r): If the current segment is completely outside [l, r], return infinity. If completely inside, return the node value. Otherwise, recurse on both children and return the minimum.
+
+Update(i, val): Update the leaf at index i, then propagate the change upward by recomputing min at each ancestor.
+
+Advantages:
+Supports both range queries and point updates in O(log n).
+Simple recursive structure that is easy to reason about.
+Can be extended to support range updates with lazy propagation.
+
+Disadvantages:
+Requires O(4n) space for the tree array.
+More complex to implement than a simple prefix minimum array.
+Overkill for static arrays where sparse table (O(1) query) is preferred.
+
+Applications:
+Range minimum/maximum queries in competitive programming.
+Interval scheduling and resource allocation.
+Database query optimization.
+
+Real Life Applications:
+Finding the minimum temperature in a date range from sensor data.
+Stock market analysis for minimum price over a period.
+Network routing to find the minimum-cost path segment.
+
+Time Complexity:
+Build: O(n)
+Query: O(log n)
+Update: O(log n)
+
+Space Complexity: O(n) for the segment tree array (typically 4*n allocated).
+
+Stable / Not Stable: Not applicable (not a sorting algorithm).
+
+In-place / Not In-place: Not in-place (requires an auxiliary tree array).
+
+Prerequisites:
+Basic understanding of arrays and recursion.
+Familiarity with binary trees.
+Understanding of divide and conquer.
+
+Common Mistakes:
+Allocating insufficient space for the segment tree (should be 4*n).
+Off-by-one errors in segment boundaries during build and query.
+Forgetting to update parent nodes after a point update.
+Returning wrong value (0 instead of infinity) for out-of-range segments.
+
+When to Use:
+When you need both range queries and point updates efficiently.
+When the array is dynamic (values change over time).
+
+When Not to Use:
+When the array is static — use Sparse Table for O(1) queries.
+When only prefix queries are needed — a simple prefix array suffices.
+
+For more information visit Codorythm platform.

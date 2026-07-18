@@ -1,0 +1,71 @@
+Aim :-
+
+The aim of this visualization is to help learners understand the working of the Evaluate Division algorithm using Weighted Union-Find (also known as Weighted DSU) through intuitive animations and interactive control.
+
+This simulator enables users to:
+
+Visualize how variables are grouped into components using Union-Find with weights.
+Understand how division queries are answered by tracing paths through the union structure.
+Interactively step through union and find operations.
+Learn how path compression and union by rank optimize the structure.
+Understand how Evaluate Division achieves near O(1) per query after preprocessing.
+
+This is ideal for learners exploring graph-based problems and Union-Find data structures.
+
+Theory:-
+
+Definition: Evaluate Division is a problem where you are given a list of equations like A / B = k and a list of queries. The goal is to compute the result of each query using the given equations, or return -1.0 if it cannot be determined.
+
+Working Principle: Each variable is treated as a node. Each equation A / B = k creates a weighted edge between A and B. Using Weighted Union-Find, each node stores a weight relative to its root. When two nodes are in the same component, their ratio can be computed by dividing their weights. For a query C / D, if both C and D share the same root, the answer is weight[C] / weight[D].
+
+Weighted Union-Find:
+- find(x): Returns the root of x and updates the weight of x to be relative to the root (path compression with weight accumulation).
+- union(x, y, value): Merges the components of x and y such that weight[x] / weight[y] = value.
+
+Advantages:
+Near O(1) per query after building the structure.
+Handles transitive relationships efficiently.
+Works well for sparse equation graphs.
+
+Disadvantages:
+Requires all variables to be known upfront.
+Cannot handle contradictory equations.
+More complex to implement than BFS/DFS approaches.
+
+Applications:
+Unit conversion systems.
+Currency exchange rate computation.
+Dependency resolution in build systems.
+
+Real Life Applications:
+Converting between measurement units (e.g., km to miles via meters).
+Computing exchange rates between currencies using known pairs.
+Resolving variable relationships in constraint solvers.
+
+Time Complexity: O(N * alpha(N)) where N is the number of equations and alpha is the inverse Ackermann function (near constant).
+
+Space Complexity: O(N) for the parent and weight arrays.
+
+Stable / Not Stable: Not applicable (not a sorting algorithm).
+
+In-place / Not In-place: In-place (modifies the parent/weight arrays directly).
+
+Prerequisites:
+Basic understanding of graphs and edges.
+Familiarity with Union-Find (Disjoint Set Union).
+Understanding of path compression and union by rank.
+
+Common Mistakes:
+Forgetting to accumulate weights during path compression.
+Not handling the case where a variable does not exist in the equations.
+Returning -1.0 when both variables are the same but not in the structure.
+
+When to Use:
+When you need to answer ratio queries between variables connected by known ratios.
+When the relationship graph is sparse and queries are frequent.
+
+When Not to Use:
+When the graph is dense and BFS/DFS would be simpler.
+When equations may be contradictory and need to be detected.
+
+For more information visit Codorythm platform.

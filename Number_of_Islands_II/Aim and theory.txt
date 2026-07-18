@@ -1,0 +1,66 @@
+Aim :-
+
+The aim of this visualization is to help learners understand the working of the Number of Islands II (Online Union-Find) algorithm using intuitive animations and interactive controls.
+
+This simulator enables users to:
+
+Visualize how land cells are added one by one to a grid and how islands are formed and merged dynamically.
+Identify how the Union-Find structure updates the parent and rank arrays after each land addition.
+Interactively control steps and trace how neighboring land cells are merged into the same island.
+Receive real-time updates on the island count after each operation.
+Learn how dynamic connectivity problems are solved efficiently using Online Union-Find.
+
+This is ideal for learners exploring dynamic graph problems and understanding how Union-Find handles real-time connectivity updates on a 2D grid.
+
+Theory:-
+
+Definition: Number of Islands II is a dynamic version of the classic Number of Islands problem. Given an m x n grid initially filled with water, we receive a series of operations where each operation turns a water cell into a land cell. After each operation, we must return the current number of islands.
+
+Working Principle: We maintain a Union-Find structure over all m*n cells. Each cell is identified by a unique index (row * n + col). When a cell is turned into land, we increment the island count by 1. Then we check all four neighbors (up, down, left, right). For each neighbor that is already land, if they belong to different components, we union them and decrement the island count by 1. After processing all neighbors, we record the current island count.
+
+Precondition: The grid is m x n, initially all water. Operations are given as a list of (row, col) positions. The same cell may be added more than once (duplicates should be ignored).
+
+Advantages:
+
+Handles dynamic land additions efficiently without recomputing from scratch.
+Union-Find with path compression and union by rank gives near O(1) per operation.
+Scales well for large grids with many operations.
+
+Disadvantages:
+
+More complex to implement than a simple DFS/BFS approach.
+Requires careful index mapping from 2D grid coordinates to 1D Union-Find array.
+Handling duplicate operations adds extra bookkeeping.
+
+Time Complexity: O(k * alpha(m*n)) where k is the number of operations and alpha is the inverse Ackermann function — practically O(k) for all real inputs.
+
+Space Complexity: O(m * n) for the parent, rank, and land arrays.
+
+Stable / Not Stable: Not applicable (this is a graph algorithm, not a sorting algorithm).
+
+In-place / Not In-place: Not in-place — requires parent, rank, and land tracking arrays of size m*n.
+
+Prerequisites:
+
+Basic understanding of 2D grids and coordinate systems.
+Understanding of Union-Find (Disjoint Set Union) data structure with path compression and union by rank.
+Familiarity with the classic Number of Islands problem.
+
+Common Mistakes:
+
+Forgetting to check for duplicate operations — adding the same cell twice should not change the island count.
+Incorrect index mapping — always use (row * n + col) to convert 2D coordinates to a 1D index.
+Forgetting to decrement the island count when two neighboring land cells are merged.
+Not initializing the parent array correctly — each cell should be its own parent initially.
+
+When to Use:
+
+When land cells are added dynamically and you need the island count after each addition.
+When the grid is large and recomputing from scratch after each operation is too slow.
+When solving online/streaming connectivity problems on a 2D grid.
+
+When Not to Use:
+
+When the entire grid is given at once — a simple DFS/BFS is simpler and sufficient.
+When cells can also be removed (turned back to water) — Union-Find does not support deletions easily.
+When you need the actual shape or coordinates of each island, not just the count.

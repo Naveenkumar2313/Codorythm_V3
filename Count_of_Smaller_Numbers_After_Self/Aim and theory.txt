@@ -1,0 +1,81 @@
+Aim :-
+
+The aim of this visualization is to help learners understand the working of the Count of Smaller Numbers After Self algorithm using a Binary Indexed Tree (Fenwick Tree / BIT) through intuitive animations and interactive control.
+
+This simulator enables users to:
+
+Visualize how elements are processed from right to left and inserted into the BIT.
+Understand how prefix sum queries on the BIT count smaller elements seen so far.
+Observe how coordinate compression maps arbitrary values to BIT indices.
+Learn how the BIT achieves O(n log n) overall complexity for this problem.
+Interactively step through the traversal, insertion, and query operations.
+
+This is ideal for learners exploring inversion counting, order statistics, and BIT-based techniques.
+
+Theory:-
+
+Definition: Count of Smaller Numbers After Self is a problem where, given an integer array, you must return a result array where result[i] is the count of elements to the right of nums[i] that are strictly smaller than nums[i].
+
+Working Principle: The array is traversed from right to left. A BIT is used to maintain a frequency table of elements seen so far. For each element, a prefix sum query on the BIT gives the count of elements already inserted that are smaller. Then the element is inserted into the BIT. Coordinate compression is applied first to map values to a valid BIT index range.
+
+Coordinate Compression:
+Since values can be negative or very large, all values are sorted and mapped to indices 1, 2, 3, ... before being inserted into the BIT. This ensures BIT indices stay within a manageable range.
+
+Key Steps:
+1. Coordinate compress all values to range [1, n].
+2. Traverse from right to left.
+3. For each element at compressed index k, query prefix_sum(k - 1) to get count of smaller elements.
+4. Update BIT at index k by adding 1.
+5. Store the result in reverse order.
+
+Advantages:
+O(n log n) time complexity — much faster than the O(n²) brute force.
+Simple BIT operations (update and prefix query) are all that is needed.
+Works correctly with duplicates and negative numbers after coordinate compression.
+
+Disadvantages:
+Requires coordinate compression as a preprocessing step.
+Slightly harder to understand than the brute force approach.
+Not as intuitive as merge sort based inversion counting for beginners.
+
+Applications:
+Counting inversions in an array.
+Order statistics problems.
+Competitive programming problems involving relative ordering.
+
+Real Life Applications:
+Ranking systems where you need to count how many future entries are lower than the current one.
+Stock market analysis to count how many future prices are lower than today's price.
+Leaderboard systems tracking how many later scores are below a given score.
+
+Time Complexity:
+Coordinate Compression: O(n log n)
+BIT Build + Queries: O(n log n)
+Overall: O(n log n)
+
+Space Complexity: O(n) for the BIT and compressed index arrays.
+
+Stable / Not Stable: Not applicable (not a sorting algorithm).
+
+In-place / Not In-place: Not in-place (requires auxiliary BIT and result arrays).
+
+Prerequisites:
+Understanding of Fenwick Tree (BIT) update and prefix sum operations.
+Familiarity with coordinate compression.
+Basic understanding of traversal order and frequency counting.
+
+Common Mistakes:
+Forgetting to traverse from right to left — left to right gives wrong results.
+Not applying coordinate compression — raw values may be negative or out of BIT range.
+Querying prefix_sum(k) instead of prefix_sum(k - 1) — this includes the element itself.
+Reversing the result array at the end — since traversal is right to left, results are collected in reverse.
+
+When to Use:
+When you need to count smaller elements to the right of each element efficiently.
+When the array is large and O(n²) brute force is too slow.
+
+When Not to Use:
+When the array is very small — brute force is simpler and sufficient.
+When you need counts of larger elements — a small modification handles this, but a different approach may be clearer.
+
+For more information visit Codorythm platform.

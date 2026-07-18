@@ -1,0 +1,82 @@
+Aim :-
+
+The aim of this visualization is to help learners understand the working of the Accounts Merge algorithm using Union-Find (Disjoint Set Union) through intuitive animations and interactive control.
+
+This simulator enables users to:
+
+Visualize how email addresses across multiple accounts are grouped into connected components using Union-Find.
+Understand how the first email in each account acts as a representative to union all emails in that account.
+Observe how accounts belonging to the same person are identified by shared emails and merged together.
+Learn how the final merged accounts are reconstructed by grouping emails under their root representative.
+Interactively step through the union, find, and grouping operations.
+
+This is ideal for learners exploring Union-Find applications on string-based graph problems.
+
+Theory:-
+
+Definition: Accounts Merge is a problem where you are given a list of accounts, each containing a name followed by a list of email addresses. Two accounts belong to the same person if they share at least one common email. The goal is to merge all accounts belonging to the same person and return the merged accounts with emails sorted.
+
+Working Principle: Each email is treated as a node in a graph. For each account, all emails in that account are unioned together using the first email as the representative. After processing all accounts, emails that share the same root in the Union-Find structure belong to the same person. The merged account is reconstructed by grouping all emails under their root, sorting them, and prepending the account name.
+
+Key Steps:
+1. Map each email to a unique integer index.
+2. For each account, union all emails with the first email of that account.
+3. Also map each email to its account owner name.
+4. After all unions, group emails by their root representative.
+5. For each group, sort the emails and prepend the name to form the merged account.
+
+Union-Find with Path Compression and Union by Rank:
+- find(x): Returns the root of x with path compression.
+- union(x, y): Merges the components of x and y using union by rank.
+
+Advantages:
+Near O(n * alpha(n)) time complexity where alpha is the inverse Ackermann function (near constant).
+Handles transitive merging automatically — if A shares email with B, and B shares email with C, all three are merged.
+Simple and clean implementation using Union-Find on string-mapped indices.
+
+Disadvantages:
+Requires mapping strings (emails) to integer indices before using BIT/Union-Find.
+Sorting emails in each merged group adds O(m log m) per group.
+Does not handle the case where the same email appears under different names (treated as same person).
+
+Applications:
+Social network friend merging.
+Deduplication of user accounts in databases.
+Contact list merging in email clients.
+
+Real Life Applications:
+Merging duplicate customer profiles in an e-commerce platform.
+Combining user accounts that share a common email in a social media platform.
+Deduplicating records in a CRM system where the same person registered multiple times.
+
+Time Complexity:
+Union-Find operations: O(n * alpha(n)) where n is the total number of emails.
+Sorting emails per group: O(m log m) where m is the number of emails in a group.
+Overall: O(n * alpha(n) + n log n)
+
+Space Complexity: O(n) for the Union-Find parent, rank arrays, and email-to-index map.
+
+Stable / Not Stable: Not applicable (not a sorting algorithm).
+
+In-place / Not In-place: Not in-place (requires auxiliary Union-Find and map structures).
+
+Prerequisites:
+Understanding of Union-Find (Disjoint Set Union) with path compression and union by rank.
+Familiarity with hash maps for string-to-index mapping.
+Basic understanding of graph connectivity.
+
+Common Mistakes:
+Unioning all emails with each other instead of just with the first email — unioning with the first email is sufficient and more efficient.
+Forgetting to sort emails in the final merged account — the problem requires sorted order.
+Not mapping emails to a consistent owner name — use the name from the first occurrence of each email's root.
+Treating the account name as part of the union — only emails are unioned, names are just labels.
+
+When to Use:
+When you need to merge groups of items connected by shared attributes.
+When transitive merging is required — if A connects to B and B connects to C, all three must merge.
+
+When Not to Use:
+When accounts can be split (disconnected) after merging — Union-Find only supports merging, not splitting.
+When the relationship between accounts is weighted or directional — use a weighted graph instead.
+
+For more information visit Codorythm platform.

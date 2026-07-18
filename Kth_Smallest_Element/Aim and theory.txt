@@ -1,0 +1,81 @@
+Aim :-
+
+The aim of this visualization is to help learners understand the working of the Kth Smallest Element algorithm using Order Statistics via a Binary Indexed Tree (BIT / Fenwick Tree) through intuitive animations and interactive control.
+
+This simulator enables users to:
+
+Visualize how elements are inserted into the BIT as a frequency table.
+Understand how binary search on the BIT prefix sums locates the Kth smallest element in O(log² n) or O(log n).
+Observe how coordinate compression maps arbitrary values to valid BIT indices.
+Learn how the BIT-based order statistics approach handles dynamic insertions efficiently.
+Interactively step through insert, prefix query, and Kth smallest search operations.
+
+This is ideal for learners exploring order statistics, frequency tables, and BIT-based search techniques.
+
+Theory:-
+
+Definition: Kth Smallest Element is a problem where, given a stream or array of integers, you must find the Kth smallest element efficiently, supporting dynamic insertions.
+
+Working Principle: A BIT is used as a frequency table over a compressed value range. Each index in the BIT represents a value (after coordinate compression), and its stored count represents how many times that value has been inserted. To find the Kth smallest element, binary search is performed on the BIT prefix sums — find the smallest index i such that prefix_sum(i) >= k.
+
+Coordinate Compression:
+Since values can be arbitrary or large, all values are sorted and mapped to indices 1, 2, ..., m before being inserted into the BIT. This keeps the BIT size bounded.
+
+Key Operations:
+- insert(val): Increment the BIT at the compressed index of val by 1.
+- kth_smallest(k): Binary search on BIT prefix sums. Find the smallest index i such that prefix_sum(i) >= k. Return the decompressed value at index i.
+
+Optimized O(log n) Kth Search (Binary Lifting):
+Instead of calling prefix_sum repeatedly (O(log² n)), binary lifting traverses the BIT tree directly in O(log n) by descending bit by bit from the highest power of 2.
+
+Advantages:
+Supports dynamic insertions with O(log n) per insert.
+Kth smallest query runs in O(log n) with binary lifting or O(log² n) with binary search.
+More cache-friendly and simpler than a balanced BST order statistics tree.
+
+Disadvantages:
+Requires coordinate compression — all values must be known upfront or bounded.
+Does not support deletions natively without extra bookkeeping.
+Less flexible than a balanced BST (e.g., policy-based tree in C++) for arbitrary order statistics.
+
+Applications:
+Finding the median in a dynamic stream of numbers.
+Order statistics in competitive programming.
+Rank queries in leaderboard systems.
+
+Real Life Applications:
+Finding the Kth lowest salary in a company as new employees are added.
+Determining the Kth smallest response time in a live server monitoring system.
+Ranking players dynamically as scores are updated in a game.
+
+Time Complexity:
+Insert: O(log n)
+Kth Smallest (binary search): O(log² n)
+Kth Smallest (binary lifting): O(log n)
+
+Space Complexity: O(n) for the BIT frequency array.
+
+Stable / Not Stable: Not applicable (not a sorting algorithm).
+
+In-place / Not In-place: Not in-place (requires auxiliary BIT and compression arrays).
+
+Prerequisites:
+Understanding of Fenwick Tree (BIT) update and prefix sum operations.
+Familiarity with coordinate compression.
+Understanding of binary search and binary lifting concepts.
+
+Common Mistakes:
+Using 0-based indexing — BIT requires 1-based indexing.
+Forgetting coordinate compression — raw values may be out of BIT range.
+Off-by-one error in Kth search — checking prefix_sum(i) >= k vs prefix_sum(i) > k.
+Not handling duplicate values correctly — frequency counts must be incremented, not just set to 1.
+
+When to Use:
+When elements are inserted dynamically and Kth smallest queries are frequent.
+When a simple sorted array would be too slow to maintain (O(n) insert).
+
+When Not to Use:
+When the array is static — sorting once and indexing directly is O(1) per query.
+When deletions are also needed — consider a balanced BST or segment tree instead.
+
+For more information visit Codorythm platform.
