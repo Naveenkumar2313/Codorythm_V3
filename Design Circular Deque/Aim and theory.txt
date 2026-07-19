@@ -1,0 +1,87 @@
+Aim:
+To design and implement a Circular Double-ended Queue (Deque) using a fixed-size array or doubly linked list, supporting operations at both ends in O(1) time complexity.
+
+Definition:
+A Double-Ended Queue (Deque) is a linear data structure that supports insertion and deletion of elements from both ends (front and rear). A Circular Deque treats the underlying storage buffer as circular by wrapping indices around from the end of the buffer back to the beginning using modulo arithmetic, allowing efficient reuse of vacated space.
+
+Theory:
+A traditional deque implemented using a simple linear array suffers from waste of memory. Once elements are deleted from the front, the space before the front pointer becomes unusable unless elements are shifted, which is an O(N) operation.
+A Circular Deque solves this problem by conceptually connecting the end of the array to the beginning. Using modulo arithmetic, we can wrap index pointers counter-clockwise or clockwise.
+
+Working Principle:
+Let capacity be K. We maintain two pointers, `front` and `rear`, and a variable `size` to track the current count of elements.
+1. Insertion at Front (`insertFront`):
+   - Decrement `front`: `front = (front - 1 + capacity) % capacity`
+   - Place element at `arr[front]`
+   - Increment `size`
+2. Insertion at Rear (`insertLast`):
+   - Place element at `arr[rear]`
+   - Increment `rear`: `rear = (rear + 1) % capacity`
+   - Increment `size`
+3. Deletion at Front (`deleteFront`):
+   - Increment `front`: `front = (front + 1) % capacity`
+   - Decrement `size`
+4. Deletion at Rear (`deleteLast`):
+   - Decrement `rear`: `rear = (rear - 1 + capacity) % capacity`
+   - Decrement `size`
+5. Retrieve Front (`getFront`):
+   - Return `arr[front]`
+6. Retrieve Rear (`getRear`):
+   - Return `arr[(rear - 1 + capacity) % capacity]`
+
+Advantages:
+- O(1) Time Complexity: All insertions, deletions, and lookup operations at both ends are performed in constant time.
+- Memory Efficiency: Reuses memory slots vacated by deleted elements, avoiding shifting costs.
+- Flexible Bounds: Double-ended nature makes it a highly flexible layout for various queueing paradigms.
+
+Disadvantages:
+- Bounded Capacity: Standard circular deques require a predefined fixed size, leading to overflow if the deque is full (unless dynamic resizing is implemented, which incurs overhead).
+- Modulo Overhead: Modulo arithmetic introduces minor computational overhead compared to direct memory access.
+
+Applications:
+- Implementing both Stack and Queue behaviors.
+- A-Steal Job Scheduling algorithms (work stealing queues).
+- Storing undo/redo histories where oldest entries are discarded.
+- Web browser history navigation (back and forward buttons).
+
+Real Life Applications:
+- Traffic management control where vehicles can be directed to enter or exit from either side of a lane.
+- Double-deck loading docks where cargo can be placed/removed from either end of a carrier container.
+
+Time Complexity:
+- insertFront(): O(1)
+- insertLast(): O(1)
+- deleteFront(): O(1)
+- deleteLast(): O(1)
+- getFront(): O(1)
+- getRear(): O(1)
+- isEmpty(): O(1)
+- isFull(): O(1)
+
+Space Complexity:
+O(K) auxiliary space to store K elements, where K is the capacity.
+
+Stable/Not Stable:
+Stable. The relative order of identical elements is preserved as elements are inserted and deleted from the ends without internal shifting.
+
+In-place/Not In-place:
+In-place. The circular deque operations perform modifications directly on the allocated buffer without needing extra temporary buffers.
+
+Prerequisites:
+- Basic understanding of Arrays and Pointers.
+- Arithmetic Modulo Operator (`%`).
+- Standard Queue and Stack concepts.
+
+Common Mistakes:
+- Off-by-one errors when wrapping index pointers (e.g., forgetting to add `capacity` before modulo when subtracting indices).
+- Overlap of front and rear pointers leading to false identification of Empty vs Full states (prevented by tracking size explicitly).
+- Accessing elements when the deque is empty, resulting in segmentation faults or garbage values.
+
+When to Use:
+- When elements need to be added or removed efficiently from both ends.
+- When memory space is restricted, and elements must wrap around to prevent reallocation.
+- In sliding window problems where maximums/minimums at both ends of a window need tracking.
+
+When Not to Use:
+- When frequent access to elements in the middle of the structure is required (index search is O(N)).
+- When capacity cannot be bounded or estimated beforehand, making a linear linked list more suitable.

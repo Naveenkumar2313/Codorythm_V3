@@ -1,0 +1,66 @@
+Aim:
+To design and implement an algorithm that adds two non-negative numbers represented by two singly linked lists, where digits are stored in reverse order, and returns the sum as a new linked list.
+
+Definition:
+Add Two Numbers is a fundamental list-traversal and arithmetic algorithm. It simulates column-addition (addition with carry) from the least significant digit (head) to the most significant digit (tail), dynamically generating sum nodes.
+
+Theory:
+When representing integers of arbitrary size (BigInt), standard 32-bit or 64-bit primitive types suffer from overflow. Singly linked lists provide a way to store numbers of arbitrary length, with each node representing a digit. Since the digits are stored in reverse order, the head node contains the least significant digit (units place). This representation simplifies addition because traversal naturally proceeds from units, to tens, to hundreds, mirroring standard manual arithmetic.
+
+Working Principle:
+1. Initialize a dummy head node to construct the result list, a current pointer `curr` initialized to the dummy, and a `carry` variable initialized to 0.
+2. Traverse both linked lists `l1` and `l2` simultaneously until both are fully traversed:
+   - Extract the values of the current nodes. If a list has reached its end (NULL), treat its value as 0.
+   - Compute the sum: `sum = val1 + val2 + carry`.
+   - Update the carry: `carry = sum / 10`.
+   - Create a new node with value `sum % 10` and link it as the next node: `curr->next = new Node(sum % 10)`.
+   - Advance the `curr` pointer and the pointers of `l1` and `l2` (if they are not NULL).
+3. After the loop, if a carry remains (`carry > 0`), append a new node with the value of the carry.
+4. Return the node immediately following the dummy head.
+
+Advantages:
+- Infinite Precision: Handles numbers of arbitrary length without integer overflow.
+- Single-Pass Traversal: Solves the addition in O(max(N, M)) time without reversing the lists first.
+- Efficient Memory: Allocates memory dynamically for only the required number of digits.
+
+Disadvantages:
+- Sequential Access: Searching or index-based operations on digits take O(N) time.
+- Memory Overhead: Every digit requires a node with a pointer field, incurring substantial reference overhead compared to arrays.
+
+Applications:
+- BigInteger Arithmetic: Core element in arbitrary-precision arithmetic libraries.
+- Cryptography: Large key additions and modular operations.
+- Financial systems: Handling massive decimal calculations without rounding or overflow.
+
+Real Life Applications:
+- Arbitrary-precision calculators (like GNU bc or Python's native big integers).
+- Database systems storing and adding huge numeric decimals.
+
+Time Complexity:
+O(max(N, M)) where N and M are the number of nodes in `l1` and `l2` respectively. We traverse both lists once.
+
+Space Complexity:
+O(max(N, M)) auxiliary space to store the newly created result linked list.
+
+Stable/Not Stable:
+Not Applicable (Arithmetic/System design).
+
+In-place/Not In-place:
+Not In-place. A new linked list is constructed to hold the sum digits.
+
+Prerequisites:
+- Singly Linked Lists traversal.
+- Column-addition math.
+- Basic carry propagation concepts.
+
+Common Mistakes:
+- Forgetting to append the final carry node after both lists are exhausted.
+- Dereferencing NULL pointers when lists are of unequal lengths.
+- Forgetting to advance list pointers inside the loop.
+
+When to Use:
+- When adding large integers that exceed the capacity of primitive numeric datatypes.
+- When working on stream inputs representing numbers digit-by-digit.
+
+When Not to Use:
+- When numbers are small enough to fit within primitive types (`int`, `long`), as standard register arithmetic is significantly faster.
