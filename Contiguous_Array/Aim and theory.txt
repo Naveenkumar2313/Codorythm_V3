@@ -1,0 +1,42 @@
+Aim:-
+The aim of this visualization is to help learners understand how the Contiguous Array (Equal 0s & 1s) algorithm uses prefix balance and hashing to find the longest subarray containing an equal number of 0s and 1s through intuitive animations and interactive controls.
+
+This simulator enables users to:
+
+Visualize how each 0 and 1 affects the running balance.
+Observe how balance values are stored and matched using a hash map.
+Identify the longest valid subarray whenever the same balance reappears.
+Interactively step through every iteration and trace balance changes.
+Receive real-time updates showing hash map operations and maximum length found.
+Understand why prefix sums and hashing reduce the solution from O(n²) to O(n).
+
+This visualization is ideal for learners exploring prefix sums, hashing techniques, and efficient array algorithms.
+
+Theory:-
+Definition:The Contiguous Array problem asks us to find the length of the longest contiguous subarray that contains an equal number of 0s and 1s.
+
+Working Principle:Instead of counting 0s and 1s separately, the algorithm converts:
+0 → -1
+1 → +1
+A running balance (prefix sum) is maintained while traversing the array.
+If the same balance value appears again, it means the elements between the two occurrences have equal numbers of 0s and 1s.
+A hash map stores the first occurrence of every balance, allowing the algorithm to instantly calculate the longest valid subarray.
+
+Precondition:
+The input array must contain only binary values (0s and 1s).
+A hash map is used to record the first occurrence of each balance value.
+
+Advantages:
+Solves the problem in a single traversal.
+Much faster than checking all possible subarrays.
+Efficient use of prefix sums and hashing.
+Suitable for large binary arrays.
+
+Disadvantages:
+Requires additional memory for the hash map.
+Technique is specific to binary arrays or problems that can be transformed into prefix balances.
+Understanding the balance transformation may be less intuitive for beginners.
+
+Time Complexity:O(n)
+
+Space Complexity:O(n) (for storing balance values in the hash map)

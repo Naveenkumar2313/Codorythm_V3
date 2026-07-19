@@ -1,0 +1,40 @@
+Aim :-
+
+The aim of this visualization is to help learners understand how the Group Anagrams algorithm uses hashing to efficiently group words that are anagrams of each other.
+
+This simulator enables users to:
+
+Visualize how each word is converted into a unique hash key.
+Understand why anagrams produce the same key.
+Observe how words are grouped together inside a hash map.
+Interactively trace each insertion into the corresponding group.
+Receive real-time updates and audio feedback during grouping.
+Learn how hashing eliminates the need for comparing every pair of strings.
+
+This visualization is ideal for learners exploring Hashing, String Manipulation, and efficient grouping techniques.
+
+Theory:-
+
+Definition: Group Anagrams is a hashing-based algorithm that groups together strings containing the same characters with the same frequencies, regardless of their order.
+
+Working Principle: Each string is transformed into a unique key (typically by sorting its characters or by using a character frequency count). This key is used in a hash map, where all strings sharing the same key are stored in the same group.
+
+Precondition: The input consists of a collection of strings. Two strings belong to the same group if they are anagrams of each other.
+
+Advantages:
+Efficiently groups all anagrams in a single traversal.
+Hash map provides near constant-time insertion and lookup.
+Avoids repeated comparisons between every pair of strings.
+Scales well for large collections of words.
+
+Disadvantages:
+Requires additional memory for the hash map.
+Creating keys (especially by sorting) adds extra processing time.
+Performance depends on the chosen hashing strategy.
+
+Time Complexity:O(n × k log k) using sorted strings as keys, where:
+n = number of strings
+k = average length of each string
+(Using character frequency as the key can reduce this to O(n × k) for lowercase English letters.)
+
+Space Complexity:O(n × k) for storing the hash map and grouped strings.

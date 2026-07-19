@@ -1,0 +1,48 @@
+Aim:-
+
+The aim of this visualization is to help learners understand how the Task Scheduler algorithm efficiently schedules tasks with a cooldown period using a Max Heap (Priority Queue) and a Cooldown Queue.
+
+This simulator enables users to:
+
+Visualize how the highest-frequency task is always selected first using a max heap.
+Observe tasks entering the cooldown queue after execution.
+Understand how tasks become available again once their cooldown expires.
+Identify idle CPU intervals when no task is ready to execute.
+Interactively trace every scheduling cycle with heap, cooldown, and timeline animations.
+Receive real-time updates on executed tasks, cooldown countdowns, and remaining frequencies.
+Learn how priority queues optimize scheduling while respecting cooldown constraints.
+
+This visualization is ideal for learners exploring Heap (Priority Queue) applications, greedy scheduling techniques, and CPU task management problems.
+
+Theory:-
+
+Definition:The Task Scheduler algorithm determines the minimum number of CPU intervals required to execute all given tasks while ensuring that identical tasks are separated by at least n cooldown intervals.
+
+Working Principle:A Max Heap (Priority Queue) stores tasks based on their remaining frequency. In each CPU interval, the task with the highest remaining count is executed. If it still has pending executions, it is placed into a Cooldown Queue until its cooldown period expires. When no task is available, the CPU remains idle until a task becomes eligible again.
+
+Precondition:
+
+Each task requires exactly one unit of execution time.
+A non-negative cooldown value n is provided.
+Tasks can be executed in any order as long as cooldown constraints are satisfied.
+
+Advantages:
+
+Efficiently minimizes total execution time.
+Uses greedy scheduling to maximize CPU utilization.
+Demonstrates a practical application of heaps and priority queues.
+Handles tasks with varying frequencies effectively.
+
+Disadvantages:
+
+Requires additional memory for the heap and cooldown queue.
+Scheduling logic is more complex than simple sequential execution.
+Performance depends on efficient priority queue operations.
+
+Time Complexity:O(T log K)
+Where:
+T = Total number of task executions (including idle intervals if simulated)
+K = Number of distinct task types
+
+Space Complexity:O(K)
+Where K is the number of unique task types stored in the heap and cooldown queue.

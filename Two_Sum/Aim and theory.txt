@@ -1,0 +1,37 @@
+Aim:-
+
+The aim of this visualization is to help learners understand how the Two Sum algorithm uses Hashing to efficiently find two numbers in an array whose sum equals a given target.
+
+This simulator enables users to:
+
+Visualize how elements are processed one by one while traversing the array.
+Observe how a hash map stores previously visited values for constant-time lookups.
+Understand how complements (target - current element) are searched instantly.
+Interactively control each step and trace the algorithm's execution.
+Receive real-time updates and audio feedback for insertions, lookups, and successful matches.
+Learn why hashing reduces the time complexity from O(n²) to O(n).
+
+This is ideal for learners exploring Hashing techniques, complement-based searching, and optimizing array problems.
+
+Theory:-
+
+Definition: Two Sum is a fundamental array problem in which the objective is to find the indices (or values) of two elements whose sum equals a given target. The optimal solution uses a Hash Map to achieve linear time complexity.
+
+Working Principle: Traverse the array once. For every element, calculate its required complement (target - current value). Check whether this complement already exists in the hash map. If it does, the required pair has been found. Otherwise, store the current element and continue scanning the remaining array.
+
+Precondition: The input array can be unsorted. A hash map is used to store previously encountered elements and their indices for efficient lookups.
+
+Advantages:
+Solves the problem in a single traversal of the array.
+Hash map provides average O(1) lookup and insertion.
+Significantly faster than the brute-force approach for large datasets.
+Forms the foundation for many advanced hashing problems.
+
+Disadvantages:
+Requires additional memory for storing the hash map.
+Performance depends on efficient hash function implementation.
+Worst-case lookup time may degrade due to excessive hash collisions (rare in practice).
+
+Time Complexity:O(n)
+
+Space Complexity:O(n)

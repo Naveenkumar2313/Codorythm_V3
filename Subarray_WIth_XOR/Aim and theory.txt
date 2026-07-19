@@ -1,0 +1,36 @@
+Aim :-
+The aim of this visualization is to help learners understand how the Subarray with XOR Equal to K algorithm efficiently finds the number of subarrays whose XOR equals a given target using the Prefix XOR technique and a Hash Map.
+
+This simulator enables users to:
+
+Visualize how the Prefix XOR value changes as the array is traversed.
+Understand how previously seen Prefix XOR values are stored and reused.
+Observe how the Hash Map helps instantly detect valid subarrays.
+Interactively trace each iteration with real-time updates.
+Learn why Prefix XOR combined with hashing reduces the complexity from O(n²) to O(n).
+
+This visualization is ideal for learners exploring Prefix XOR, hashing techniques, and optimized subarray problems.
+
+Theory:-
+Definition:Subarray with XOR Equal to K is an efficient algorithm that counts the number of contiguous subarrays whose XOR is equal to a given target value K by using the Prefix XOR concept along with a Hash Map.
+
+Working Principle:As the array is traversed, a running Prefix XOR is maintained. For each element, the algorithm checks whether PrefixXOR ⊕ K has appeared previously. If it exists in the Hash Map, it indicates that one or more subarrays ending at the current index have XOR equal to K. The current Prefix XOR is then stored or updated in the Hash Map for future matches.
+
+Precondition:
+The input array can contain any integers.
+A Hash Map is used to store the frequency of previously encountered Prefix XOR values.
+The Hash Map is initially initialized with 0 → 1 to handle subarrays starting from index 0.
+
+Advantages:
+Computes the answer in a single traversal of the array.
+Eliminates the need to examine every possible subarray.
+Efficiently handles arrays containing positive, negative, and zero values.
+Demonstrates an important application of Prefix XOR and hashing.
+
+Disadvantages:
+Requires additional memory for maintaining the Hash Map.
+The Prefix XOR concept may be less intuitive for beginners compared to brute-force methods.
+
+Time Complexity:O(n)
+
+Space Complexity:O(n)

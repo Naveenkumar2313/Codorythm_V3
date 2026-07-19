@@ -1,0 +1,53 @@
+Aim :-
+The aim of this visualization is to help learners understand how the Merge K Sorted Lists algorithm efficiently combines multiple sorted linked lists into a single sorted list using a Min Heap (Priority Queue).
+
+This simulator enables users to:
+
+Visualize how the smallest element is selected from multiple lists at every step.
+Understand how a Min Heap maintains the next minimum element among all lists.
+Observe how nodes are removed from the heap and appended to the merged list.
+Interactively control each merging step with animations and execution history.
+Receive real-time updates and audio feedback during the merging process.
+Learn why using a Priority Queue significantly improves efficiency over repeatedly scanning all lists.
+
+This visualization is ideal for learners studying Heap & Priority Queue algorithms, efficient data merging techniques, and interview-based linked list problems.
+
+Theory:-
+Definition:Merge K Sorted Lists is an algorithm that combines K individually sorted linked lists into a single sorted linked list while preserving the overall sorted order.
+
+Working Principle:
+The algorithm uses a Min Heap (Priority Queue) to always retrieve the smallest current element among all lists.
+
+Initially, the first node of every non-empty linked list is inserted into the Min Heap.
+
+The algorithm repeatedly:
+
+Removes the smallest node from the Min Heap.
+Adds it to the merged linked list.
+Inserts the next node from the same list (if available) into the Min Heap.
+
+This process continues until the Min Heap becomes empty, resulting in one completely sorted linked list.
+
+Precondition:
+Each individual linked list must already be sorted.
+A Min Heap (Priority Queue) should be available for efficient minimum element extraction.
+
+Advantages:
+Efficiently merges multiple sorted lists.
+Much faster than repeatedly merging two lists one at a time.
+Maintains sorted order throughout the merging process.
+Widely used in external sorting, database systems, and distributed data processing.
+
+Disadvantages:
+Requires extra memory for the Min Heap.
+Slightly more complex to implement than merging two sorted lists.
+Performance depends on maintaining the Priority Queue efficiently.
+
+Time Complexity:O(N log K)
+Where:
+N = Total number of nodes across all linked lists.
+K = Number of sorted linked lists.
+Each node is inserted into and removed from the Min Heap exactly once.
+
+Space Complexity:O(K)
+The Min Heap stores at most one node from each linked list at any given time.

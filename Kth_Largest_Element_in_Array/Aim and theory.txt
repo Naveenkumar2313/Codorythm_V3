@@ -1,0 +1,52 @@
+Aim :
+
+The aim of this visualization is to help learners understand how the Kth Largest Element in an Array can be efficiently found using a Min Heap (Priority Queue) through interactive animations and real-time simulation.
+
+This simulator enables users to:
+
+Visualize how a min-heap of size k is built and maintained throughout the process.
+Observe how each incoming element competes with the heap's root for a position among the top k largest elements.
+Understand why smaller elements are discarded while larger elements replace the heap's minimum.
+Interactively control each insertion, removal, and heap adjustment step.
+Receive real-time updates showing the current heap contents and the evolving kth largest candidate.
+Learn how heap-based optimization reduces unnecessary sorting and achieves efficient performance.
+
+This visualization is ideal for learners exploring Heap Data Structures, Priority Queues, and interview problems involving efficient selection algorithms.
+
+Theory :
+Definition:The Kth Largest Element in an Array problem involves finding the element that would appear at the kth position when the array is sorted in descending order, without necessarily sorting the entire array.
+
+Working Principle:
+A Min Heap (Priority Queue) of size k is maintained.
+
+Insert the first k elements into the min-heap.
+The smallest element among these remains at the root.
+For every remaining element:
+Compare it with the heap's root.
+If it is larger than the root, remove the root and insert the new element.
+Otherwise, ignore the element.
+After processing all elements, the root of the heap represents the kth largest element.
+
+Precondition:
+The value of k must satisfy 1 ≤ k ≤ n, where n is the size of the array.
+The array may contain duplicate values.
+The array does not need to be sorted.
+
+Advantages:
+Efficient for finding the kth largest element without sorting the entire array.
+Requires only O(k) extra space.
+Performs well for large datasets when k is relatively small.
+Avoids unnecessary computations compared to full sorting.
+
+Disadvantages:
+Slightly more complex than simple sorting.
+Heap operations introduce additional implementation overhead.
+Not the fastest approach when k is very close to the array size and sorting is acceptable.
+
+Time Complexity:
+Building the initial heap: O(k)
+Processing remaining elements: O((n − k) log k)
+Overall: O(n log k)
+
+Space Complexity:
+O(k) (for the min-heap)

@@ -1,0 +1,45 @@
+Aim :-
+
+The aim of this visualization is to help learners understand how the Longest Consecutive Sequence algorithm efficiently finds the longest streak of consecutive integers in an unsorted array using hash-based lookup (HashSet).
+
+This simulator enables users to:
+
+Visualize how numbers are inserted into a HashSet for constant-time lookup.
+Identify the starting point of each consecutive sequence.
+Observe how the algorithm expands a sequence by checking the next consecutive numbers.
+Interactively trace every iteration and understand why duplicate or non-starting elements are skipped.
+Receive real-time updates on the current sequence length and the longest sequence found.
+Learn how the algorithm achieves O(n) time complexity by avoiding unnecessary repeated traversals.
+
+This visualization is ideal for learners exploring efficient searching techniques, hash-based optimizations, and interview-level array problems.
+
+Theory:-
+
+Definition:
+The Longest Consecutive Sequence problem requires finding the length of the longest sequence of consecutive integers present in an unsorted array.
+
+Working Principle:
+The algorithm first stores all elements in a HashSet for O(1) average lookup. Then, for each number, it checks whether it is the beginning of a sequence by verifying that its previous number (num - 1) is absent. If it is a starting point, the algorithm continues checking num + 1, num + 2, and so on until the sequence ends, while counting its length. The maximum length encountered is returned.
+
+Precondition:
+
+The input array can be unsorted.
+Elements may contain duplicates.
+Integers can be positive, negative, or zero.
+
+Advantages:
+
+Runs in linear time using a HashSet.
+Eliminates the need to sort the array.
+Efficiently skips unnecessary traversals by only expanding from sequence starting points.
+Handles duplicate values naturally.
+
+Disadvantages:
+
+Requires additional memory for the HashSet.
+Performance depends on efficient hash table implementation.
+Slightly higher space usage compared to sorting-based approaches.
+
+Time Complexity: O(n)
+
+Space Complexity: O(n)

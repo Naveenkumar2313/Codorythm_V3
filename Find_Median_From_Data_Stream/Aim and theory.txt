@@ -1,0 +1,53 @@
+Aim :
+The aim of this visualization is to help learners understand how the Find Median from Data Stream algorithm efficiently maintains the median of a continuously growing sequence of numbers using two heaps.
+
+This simulator enables users to:
+
+Visualize how numbers are inserted into the max heap and min heap.
+Understand why the data is divided into two balanced halves.
+Observe how heap rebalancing maintains the required size difference.
+Track the current median after every insertion in real time.
+Interactively control each insertion step and monitor heap updates.
+Receive audio feedback and live status updates during the simulation.
+Learn how heaps enable efficient median retrieval without sorting the entire dataset.
+
+This visualization is ideal for learners exploring heap-based algorithms, streaming data processing, and efficient online computations.
+
+Theory :
+Definition:Find Median from Data Stream is a heap-based algorithm that continuously computes the median as new numbers arrive, without storing the data in sorted order after every insertion.
+
+Working Principle:
+The algorithm maintains two heaps:
+Max Heap: Stores the smaller half of the numbers. The largest element of this half remains at the root.
+Min Heap: Stores the larger half of the numbers. The smallest element of this half remains at the root.
+
+Whenever a new number is inserted:
+
+The number is placed into the appropriate heap.
+The heaps are rebalanced if their sizes differ by more than one.
+The median is calculated:
+If both heaps contain the same number of elements, the median is the average of their root elements.
+If one heap contains one extra element, its root is the median.
+
+This approach allows efficient insertion while keeping the median readily available.
+
+Precondition:
+Numbers are received one at a time from a continuous data stream.
+No prior sorting of the input is required.
+
+Advantages:
+Efficiently computes the median after every insertion.
+Does not require sorting the entire dataset repeatedly.
+Suitable for real-time and streaming applications.
+Handles dynamic data efficiently using heaps.
+
+Disadvantages:
+Requires additional memory for maintaining two heaps.
+More complex to implement than simple sorting-based approaches.
+Heap maintenance introduces extra implementation overhead.
+
+Time Complexity:
+Insertion: O(log n)
+Median Retrieval: O(1)
+
+Space Complexity: O(n), as all inserted elements are stored across the two heaps.
