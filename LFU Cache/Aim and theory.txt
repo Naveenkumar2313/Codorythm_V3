@@ -1,0 +1,30 @@
+Aim:
+To understand the Least Frequently Used (LFU) Cache algorithm, its design principles, and how to implement it efficiently in O(1) time for both get and put operations.
+
+Definition:
+An LFU (Least Frequently Used) Cache is a type of cache that evicts the least frequently accessed item when the cache exceeds its capacity. If multiple items share the minimum frequency, the Least Recently Used (LRU) item among them is evicted.
+
+Theory:
+The LFU cache tracks how many times each key is accessed. Keys with the lowest access count are the first candidates for eviction. Among equally frequent keys, the one that was accessed least recently is evicted — combining frequency ordering with LRU tie-breaking.
+
+The efficient O(1) implementation uses three data structures:
+1. A HashMap<key, (value, frequency)> for O(1) key-value and frequency lookup.
+2. A HashMap<frequency, OrderedSet/LinkedHashSet<key>> that maps each frequency to the set of keys with that frequency, ordered from LRU to MRU.
+3. A minFreq variable tracking the current minimum frequency.
+
+Working Principle:
+GET(key):
+- If key is not in cache, return -1.
+- Else, increment its frequency, move it from freq[f] to freq[f+1], update minFreq if freq[minFreq] is now empty. Return value.
+
+PUT(key, value):
+- If key exists: update value, call GET logic to increment frequency.
+- If key does not exist:
+  - If cache is full, evict the LRU item in the freq[minFreq] bucket.
+  - Insert key with frequency 1, add to freq[1], set minFreq = 1.
+
+Key Properties:
+- get() time complexity: O(1)
+- put() time complexity: O(1)
+- Space complexity: O(capacity)
+- Combines frequency tracking with LRU ordering for tie-breaking

@@ -1,0 +1,71 @@
+Aim:
+To implement and design a simplified version of Twitter supporting various core operations (posting tweets, following/unfollowing users, and retrieving news feeds) along with advanced system design extensions (likes, deletes, blocks, retweets, pagination, DMs, trending hashtags, mutual friends feed, recommended feeds, user mentions, muting users, group following, and nested transactions).
+
+Definition:
+Design Twitter is a classic system design and object-oriented programming problem that models a social network. It requires structuring a relational graph for follower-followee relationships, managing a chronological stream of tweets, and generating personalized feeds efficiently.
+
+Theory:
+1. Feed Generation Models:
+   - Pull Model (Fan-out-on-read): Tweets are stored globally. When a user requests their news feed, the system queries all their followees' tweets, merges them chronologically, and takes the top N. This is cheap on writes but expensive on reads.
+   - Push Model (Fan-out-on-write): Each user has a personal inbox/feed cache. When a user posts a tweet, it is pushed/copied to the feeds of all their followers. This is cheap on reads but expensive on writes (especially for celebrities/users with millions of followers).
+   - Hybrid Model: Most platforms use a hybrid model where celebrity tweets are pulled, and regular users' tweets are pushed.
+2. User Relationships:
+   - Directed Graph: The follower relationship is directed (A follows B does not imply B follows A).
+3. Database and Transaction Support:
+   - Standard relational guarantees (ACID) are implemented using transactions. Transactions store staging states and apply them on commit or revert them on rollback.
+   - Nested transactions maintain a stack of snapshots to support multi-layered transactions.
+
+Working Principle:
+- postTweet(userId, tweetId): Appends the tweet with the user's ID to a chronological feed/history.
+- follow(followerId, followeeId): Adds the followeeId to followerId's set of followed users.
+- unfollow(followerId, followeeId): Removes the followeeId from followerId's set of followed users.
+- getNewsFeed(userId): Gathers all tweets from the user and their followees, sorts them by post time descending, and returns the top 10 unique tweets.
+
+Advantages:
+- In-memory representations are extremely fast for small user bases.
+- Pull-based generation minimizes redundant storage by avoiding pre-built feeds for inactive users.
+
+Disadvantages:
+- Standard list merging without indexing can be slow at scale.
+- High memory usage for storing entire relationship graphs in memory.
+
+Applications:
+- Activity feeds in modern social platforms (Facebook, Twitter, LinkedIn, Instagram).
+- System-wide audit logs and chronological notification streams.
+
+Real Life Applications:
+- Twitter/X home timelines.
+- Instagram home feeds.
+- LinkedIn activity feeds.
+
+Time Complexity:
+- postTweet: O(1)
+- follow/unfollow: O(1)
+- getNewsFeed: O(N log K) or O(N) where N is the total tweets and K is the number of followees.
+
+Space Complexity:
+- O(U + T) where U is the number of users/follows and T is the total number of tweets stored.
+
+Stable/Not Stable:
+Not Applicable (System Design).
+
+In-place/Not In-place:
+Not Applicable.
+
+Prerequisites:
+- Hash Maps, Sets, and Lists.
+- Priority Queues / Heaps (for efficient sorted list merging).
+- Stack data structure (for transaction states).
+
+Common Mistakes:
+- Forgetting to include the user's own tweets in their news feed.
+- Duplicate follow requests creating duplicate followees.
+- Not handling self-follow/unfollow loops.
+- Not filtering blocked users' tweets from each other's feeds.
+- Memory leaks in nested transactions due to uncommitted staging frames.
+
+When to Use:
+- When building a social graph, activity feed, message inbox, or personalized dashboard.
+
+When Not to Use:
+- When handling massive data volumes that require distributed databases, shard indexes, and cache-aside layers (like Redis).

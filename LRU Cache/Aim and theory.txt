@@ -1,0 +1,26 @@
+Aim :- 
+
+The aim of this visualization is to help learners understand the Least Recently Used (LRU) Cache eviction policy and how the combination of a Hash Map and a Doubly Linked List achieves O(1) time complexity for both read and write operations.
+
+This simulator enables users to:
+1. Visualize the cache capacity and state dynamically.
+2. Observe how elements are accessed, causing them to move to the head of the list (Most Recently Used position).
+3. Watch the eviction process when the cache is full, where the tail of the list (Least Recently Used element) is discarded.
+4. Interact with the cache by performing GET and PUT operations step-by-step.
+5. Inspect the internal structure (doubly linked list pointers and hash map keys) in real-time.
+
+Theory :- 
+
+Definition: Least Recently Used (LRU) Cache is a caching strategy that discards the least recently used items first when the cache capacity is exceeded. It requires keeping track of when each item was used.
+
+Working Principle:
+1. Hash Map: Provides O(1) lookup time to check if a key exists in the cache and retrieve the corresponding node in the doubly linked list.
+2. Doubly Linked List: Maintains the access order of elements. 
+   - When a key is accessed (GET) or updated (PUT), its corresponding node is moved to the head (MRU).
+   - When a new key is inserted (PUT) and cache is at capacity, the node at the tail (LRU) is removed from both the list and the hash map, and the new node is inserted at the head.
+
+Complexity Analysis:
+- Time Complexity:
+  - GET: O(1) on average.
+  - PUT: O(1) on average.
+- Space Complexity: O(C), where C is the capacity of the cache.

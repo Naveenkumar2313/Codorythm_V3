@@ -1,0 +1,71 @@
+Aim:
+To reverse nodes of a singly linked list in blocks of size $k$ and return the modified list, keeping any remaining nodes at the end in their original order if they do not form a complete block of size $k$.
+
+Definition:
+Reverse Nodes in K-Group is an advanced pointer-manipulation algorithm. It partitions a linked list into sublists of size $k$, reverses each sublist in-place, and links the reversed blocks together while leaving incomplete segments untouched.
+
+Theory:
+Standard linked list reversal flips the next pointers of all nodes. K-Group reversal segments this process.
+For a given list: `1 -> 2 -> 3 -> 4 -> 5` and `k = 2`:
+1. First block: `[1, 2]`. Reversed: `2 -> 1`.
+2. Second block: `[3, 4]`. Reversed: `4 -> 3`.
+3. Leftover block: `[5]`. Left as is: `5`.
+Result: `2 -> 1 -> 4 -> 3 -> 5`.
+To implement this efficiently in-place, we must keep track of:
+- The head and tail of the current block.
+- The tail of the previous reversed block (to connect it to the head of the newly reversed block).
+- The head of the next block to process.
+
+Working Principle:
+1. Traverse the list to check if there are at least $k$ nodes remaining. If not, return the current head (no reversal).
+2. If there are at least $k$ nodes, identify the boundaries of this group.
+3. Reverse the $k$ nodes using the standard iterative three-pointer technique (`prev`, `curr`, `next_node`).
+4. The original head of the group becomes the tail of the reversed group. Connect its next pointer to the result of recursively calling the function on the remaining part of the list.
+5. Return the new head of the reversed group (`prev`).
+
+Advantages:
+- In-place modification: Reverses list segments without using extra memory pools or node creations.
+- Linear execution: Single-pass traversal over the nodes.
+
+Disadvantages:
+- Complex links: Difficult pointer re-wiring that can easily cause reference loss or circular loops.
+- Call stack overhead: Recursive versions consume stack space proportional to $N/k$.
+
+Applications:
+- Data pagination: Flipping display elements in fixed-size pages.
+- Memory block management: Reversing sub-segments of linked buffer blocks.
+- Cryptography: Block-based swapping and encryption key rearrangements.
+
+Real Life Applications:
+- Network packet streaming: Reordering data packets in block frames before buffer assembly.
+- Text editors: Group-based block updates or undo layouts.
+
+Time Complexity:
+O(N) where N is the total number of nodes in the linked list.
+
+Space Complexity:
+- O(1) auxiliary space for the iterative, pointer-based solution.
+- O(N/k) stack space for recursive implementations.
+
+Stable/Not Stable:
+Not Stable (reorders node positions).
+
+In-place/Not In-place:
+In-place (mutates next pointers directly).
+
+Prerequisites:
+- Singly linked list traversal.
+- Reversing a standard singly linked list.
+
+Common Mistakes:
+- Reversing the final incomplete block of size $< k$ (this must be left in original order).
+- Creating infinite loops by not breaking the sublist tail's connection to the next block before reversing.
+- Losing references to the head of the list.
+
+When to Use:
+- When processing linked list nodes in fixed block segments.
+- When optimization demands in-place element reversing.
+
+When Not to Use:
+- When using arrays (array reversal is simpler and runs with random access).
+- When the block size $k$ is 1 (reversing groups of size 1 has no effect).

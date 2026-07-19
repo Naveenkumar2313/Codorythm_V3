@@ -1,0 +1,38 @@
+Aim:
+To understand the Min Stack data structure, which supports standard stack operations while also returning the minimum element in the stack in O(1) time.
+
+Definition:
+A Min Stack is a stack that, in addition to standard push, pop, and top operations, supports a getMin operation that returns the minimum element currently in the stack, all in O(1) time.
+
+Theory:
+The key challenge in a Min Stack is tracking the minimum element as items are pushed and popped. A naïve approach would scan all elements for each getMin call, giving O(N) time. The optimal approach maintains a parallel auxiliary stack of minimums.
+
+Auxiliary Stack Approach:
+1. Maintain two stacks: the main stack (stores all elements) and a min-stack (stores minimums).
+2. PUSH(val):
+   - Always push val onto the main stack.
+   - Push val onto the min-stack only if val <= min-stack.top() (or if min-stack is empty).
+3. POP():
+   - Always pop from the main stack.
+   - If the popped value equals the min-stack top, also pop the min-stack.
+4. TOP():
+   - Return main stack top. O(1).
+5. GETMIN():
+   - Return min-stack top. O(1).
+
+Alternative: Store pairs (val, currentMin) on a single stack.
+- Each entry is (value, minimum_at_this_point).
+- getMin() returns the second element of the top pair.
+
+Key Properties:
+- push(): O(1) time
+- pop(): O(1) time
+- top(): O(1) time
+- getMin(): O(1) time
+- Space complexity: O(N) for the auxiliary stack
+
+Applications:
+- Sliding window minimum problems (with deque optimization)
+- Expression parsing
+- Undo/redo systems requiring minimum tracking
+- Game state management
