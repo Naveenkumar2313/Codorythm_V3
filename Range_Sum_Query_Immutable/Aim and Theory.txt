@@ -1,0 +1,45 @@
+Aim :-
+
+The aim of this visualization is to help learners understand the working of the Range Sum Query – Immutable algorithm using the Prefix Sum technique. It helps users learn how preprocessing an array allows multiple range sum queries to be answered quickly and efficiently without modifying the original array.
+
+This simulator enables users to understand how a Prefix Sum array is constructed, visualize how range sums are calculated using precomputed values, observe the preprocessing step before answering queries, and learn why this technique provides constant-time query performance.
+
+This visualization is ideal for learners exploring Prefix Sum techniques and solving multiple range sum problems efficiently.
+
+Theory :-
+
+Definition:
+
+Range Sum Query – Immutable is an algorithm that preprocesses an array by creating a Prefix Sum array so that the sum of any subarray can be found efficiently. Since the original array never changes, the Prefix Sum array can be reused for every query.
+
+Working Principle:
+
+The algorithm first computes the cumulative sum of the array. Each element in the Prefix Sum array stores the sum of all elements from the beginning of the array up to that index. To calculate the sum between two indices, the Prefix Sum before the starting index is subtracted from the Prefix Sum at the ending index. This allows every query to be answered in constant time.
+
+Advantages:
+
+It answers range sum queries very quickly.
+
+It is simple to understand and implement.
+
+It is highly efficient when many queries are performed on the same array.
+
+It avoids recalculating the sum for every query.
+
+Disadvantages:
+
+It requires additional memory to store the Prefix Sum array.
+
+It cannot efficiently handle updates to the original array.
+
+The Prefix Sum array must be rebuilt whenever the array changes.
+
+Time Complexity:
+
+Preprocessing: O(n)
+
+Each Range Sum Query: O(1)
+
+Space Complexity:
+
+O(n)

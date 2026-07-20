@@ -1,0 +1,43 @@
+Aim :-
+
+The aim of this visualization is to help learners understand the working of the Continuous Subarray Sum (Multiple of K) algorithm using the Prefix Sum and Hash Map technique. It helps users learn how prefix sum remainders can be used to efficiently determine whether a continuous subarray of length at least two has a sum that is a multiple of a given integer.
+
+This simulator enables users to understand how prefix sum remainders are computed, visualize how previously seen remainders help identify valid subarrays, observe how a Hash Map stores the first occurrence of each remainder, and learn why this approach efficiently solves the problem in a single traversal.
+
+This visualization is ideal for learners exploring Prefix Sum, Modular Arithmetic, and Hash Map techniques for solving array-based problems efficiently.
+
+Theory :-
+
+Definition:
+
+Continuous Subarray Sum (Multiple of K) is an algorithm that determines whether an array contains a continuous subarray of length at least two whose sum is a multiple of a given integer k. It uses Prefix Sums and Modular Arithmetic to efficiently identify such subarrays by tracking previously encountered prefix sum remainders.
+
+Working Principle:
+
+The algorithm computes the Prefix Sum while traversing the array. At each step, it calculates the remainder when the Prefix Sum is divided by k. If the same remainder has been encountered before and the distance between the two indices is at least two, the sum of the elements between those indices is divisible by k, indicating a valid subarray. A Hash Map is used to store the first occurrence of each remainder, allowing the algorithm to detect valid subarrays in linear time.
+
+Advantages
+
+It efficiently determines whether a valid subarray exists in a single traversal.
+
+It avoids checking every possible subarray, significantly reducing computation time.
+
+It combines Prefix Sum, Modular Arithmetic, and Hash Map techniques for optimal performance.
+
+It is well suited for large arrays where brute-force solutions are impractical.
+
+Disadvantages:
+
+It requires additional memory to store previously encountered remainders.
+
+Correct handling of edge cases, such as k = 0, requires special attention.
+
+The logic is more complex than a straightforward brute-force approach.
+
+Time Complexity:
+
+O(n)
+
+Space Complexity:
+
+O(min(n, k)) (or O(n) in the worst case)

@@ -1,0 +1,105 @@
+Aim
+
+The aim of the Trapping Rain Water algorithm is to compute how much water can be trapped between bars of varying heights after raining. Given an array where each element represents the height of a bar at that position, the task is to find the total volume of water that can be stored between the bars.
+
+Definition
+
+Given an array height where height[i] represents the height of a bar at position i, the task is to find the total amount of water that can be trapped. Water is trapped between two bars when there exist higher bars on both the left and right sides, forming a container that can hold water up to the height of the shorter bounding bar.
+
+Theory
+
+A brute-force approach checks every position and finds the maximum height to the left and right of that position. The water at each position is the minimum of these two maximums minus the current height. This works, but it takes O(n^2) time for large arrays.
+
+The optimized approach uses the two-pointer technique. By maintaining left and right pointers along with the maximum heights seen from each side, we can compute the trapped water in a single pass. The key insight is that for any position, if the left maximum is smaller than the right maximum, the water trapped at that position depends only on the left maximum. Similarly, if the right maximum is smaller, the water depends only on the right maximum.
+
+This allows us to move the pointer pointing to the smaller maximum, ensuring we always have a valid bounding bar on the other side.
+
+Working Principle
+
+The algorithm works by processing the array from both ends using two pointers.
+
+For each step:
+
+1. Compare the left maximum and right maximum.
+2. If left maximum is smaller or equal, process the left pointer.
+3. If right maximum is smaller, process the right pointer.
+4. For the processed position, if the current height is greater than the respective maximum, update the maximum.
+5. Otherwise, add the difference between the maximum and current height to the total water.
+6. Move the pointer inward.
+7. Continue until the pointers meet.
+
+Algorithm Steps
+
+1. Initialize left pointer at 0 and right pointer at n-1.
+2. Initialize leftMax and rightMax to 0.
+3. Initialize totalWater to 0.
+4. While left pointer is less than or equal to right pointer:
+   a. If leftMax is less than or equal to rightMax:
+      - If height[left] is greater than leftMax, update leftMax.
+      - Otherwise, add leftMax - height[left] to totalWater.
+      - Increment left pointer.
+   b. Else:
+      - If height[right] is greater than rightMax, update rightMax.
+      - Otherwise, add rightMax - height[right] to totalWater.
+      - Decrement right pointer.
+5. Return totalWater.
+
+Example
+
+Input:
+
+height = [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]
+
+Processing:
+
+- Position 0 (height 0): leftMax = 0, no water trapped.
+- Position 1 (height 1): leftMax = 1, no water trapped.
+- Position 2 (height 0): leftMax = 1, water = 1 - 0 = 1.
+- Position 3 (height 2): leftMax = 2, no water trapped.
+- Position 4 (height 1): leftMax = 2, water = 2 - 1 = 1.
+- Position 5 (height 0): leftMax = 2, water = 2 - 0 = 2.
+- Position 6 (height 1): leftMax = 2, water = 2 - 1 = 1.
+- Position 7 (height 3): rightMax = 3, no water trapped.
+- Position 8 (height 2): rightMax = 3, water = 3 - 2 = 1.
+- Position 9 (height 1): rightMax = 3, water = 3 - 1 = 2.
+- Position 10 (height 2): rightMax = 3, water = 3 - 2 = 1.
+- Position 11 (height 1): rightMax = 3, water = 3 - 1 = 2.
+
+Output:
+
+6
+
+Advantages
+
+- Runs in O(n) time.
+- Uses O(1) extra space.
+- Processes the array in a single pass.
+- Avoids the need for precomputing left and right maximum arrays.
+- The two-pointer approach is elegant and efficient.
+
+Disadvantages
+
+- The two-pointer logic can be tricky to understand initially.
+- Requires careful handling of edge cases.
+- The intuition behind moving the smaller maximum pointer is not immediately obvious.
+
+Applications
+
+- Rainwater harvesting calculations.
+- Water resource management.
+- Geographic terrain analysis.
+- Game development for terrain generation.
+- Image processing for water level detection.
+- Simulation of water retention in structures.
+
+Time Complexity
+
+O(n)
+
+Each element is visited exactly once by one of the two pointers, so the total work is linear.
+
+Space Complexity
+
+O(1)
+
+Only a constant amount of extra space is used for pointers and maximums.

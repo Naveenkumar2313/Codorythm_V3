@@ -1,0 +1,52 @@
+Aim
+
+The aim of the Product of Array Except Self algorithm is to compute an output array where each element is equal to the product of all the elements in the input array except the element at the current index, without using division. This algorithm efficiently solves the problem using prefix and suffix products while maintaining linear time complexity.
+
+Theory
+
+Definition
+
+The Product of Array Except Self algorithm generates an array such that each output element contains the product of every element in the original array except itself. Instead of repeatedly multiplying all other elements for each index, the algorithm stores prefix products (product of elements before the current index) and suffix products (product of elements after the current index) to achieve an efficient solution.
+
+Working Principle
+
+The algorithm works in two passes:
+
+1. Traverse the array from left to right and store the product of all previous elements for each position.
+2. Traverse the array from right to left while maintaining the product of all elements to the right.
+3. Multiply the stored prefix product with the current suffix product to obtain the final answer for each index.
+4. Update the suffix product as the traversal continues.
+
+This approach eliminates the need for division and handles arrays containing zero values correctly.
+
+Precondition
+
+- The input array must contain at least two integers.
+- The product of any prefix or suffix is assumed to fit within the allowed integer range specified by the problem.
+- Division is not allowed.
+
+Advantages
+
+- Runs in linear time O(n).
+- Uses constant extra space (excluding the output array).
+- Does not require division.
+- Correctly handles arrays containing one or more zeroes.
+- Suitable for large input arrays.
+
+Disadvantages
+
+- Slightly more complex than the division-based approach.
+- Requires two traversals of the array.
+- Care must be taken while maintaining prefix and suffix products.
+
+Time Complexity
+
+O(n)
+
+Each element is processed twice, resulting in linear time complexity.
+
+Space Complexity
+
+O(1)
+
+The algorithm uses constant extra space apart from the output array, which is not counted as additional space.

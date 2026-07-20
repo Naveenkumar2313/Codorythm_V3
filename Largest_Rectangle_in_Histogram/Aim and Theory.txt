@@ -1,0 +1,100 @@
+Aim
+
+The aim of the Largest Rectangle in Histogram algorithm is to find the maximum rectangular area that can be formed within a histogram where each bar has unit width. The algorithm uses a monotonic stack to efficiently compute the largest rectangle in linear time.
+
+Definition
+
+Given an array heights where heights[i] represents the height of a bar at position i, the task is to find the largest rectangle that fits completely under the histogram. A rectangle can span multiple adjacent bars, with its height limited by the shortest bar in the span.
+
+Theory
+
+A brute-force approach checks every pair of bars to find the minimum height in each range and calculates the area. This works, but it takes O(n^2) time for large histograms.
+
+The optimized approach uses a stack to keep track of bar indices in increasing order of heights. For each bar, we pop bars from the stack that are taller than the current bar. When a bar is popped, it becomes the right boundary of a rectangle, and the new top of the stack becomes the left boundary. The width is the difference between these boundaries.
+
+This creates a monotonic increasing stack. Each bar is pushed once and popped once, making the total work linear.
+
+Working Principle
+
+The algorithm works by processing each bar and maintaining a stack of indices with increasing heights.
+
+For each bar at index i:
+
+1. While the stack is not empty and heights[stack.top] > heights[i], pop the top.
+2. The popped bar's height becomes the rectangle height.
+3. The left boundary is the new stack top (or -1 if empty).
+4. The right boundary is the current index i.
+5. Calculate width = i - left - 1 and update the maximum area.
+6. Push the current index onto the stack.
+
+After processing all bars, pop remaining bars and calculate their potential areas with the right boundary at n.
+
+Algorithm Steps
+
+1. Create an empty stack to store bar indices.
+2. Initialize maxArea to 0.
+3. Traverse each bar from index 0 to n-1.
+4. While the stack is not empty and heights[stack.top] > heights[i], pop the top.
+5. Calculate the area for the popped bar using the current index as right boundary.
+6. Push the current index onto the stack.
+7. After the traversal, process remaining bars in the stack with right boundary n.
+8. Return the maximum area found.
+
+Example
+
+Input:
+
+heights = [2, 1, 5, 6, 2, 3]
+
+Processing:
+
+- Index 0 (height 2): Stack is empty, push 0.
+- Index 1 (height 1): heights[0] > heights[1], pop 0. Area = 2 * 1 = 2. Push 1.
+- Index 2 (height 5): Stack top has height 1, push 2.
+- Index 3 (height 6): Stack top has height 5, push 3.
+- Index 4 (height 2): heights[3] > heights[4], pop 3. Area = 6 * 1 = 6. heights[2] > heights[4], pop 2. Area = 5 * 2 = 10. Push 4.
+- Index 5 (height 3): heights[4] <= heights[5], push 5.
+
+After traversal, process remaining:
+- Pop 5: Area = 3 * 1 = 3.
+- Pop 4: Area = 2 * 4 = 8.
+- Pop 1: Area = 1 * 6 = 6.
+
+Output:
+
+10
+
+Advantages
+
+- Runs in O(n) time.
+- Avoids checking all possible subarrays.
+- Works well for large histograms.
+- Each bar is pushed and popped exactly once.
+- Forms the base technique for many stack-based area problems.
+
+Disadvantages
+
+- Requires extra space for the stack.
+- The boundary calculations can be tricky to understand.
+- The algorithm must carefully handle empty stack cases.
+
+Applications
+
+- Image processing for finding largest rectangular region.
+- Computer vision for object detection.
+- Skyline and architectural area calculations.
+- Memory allocation visualization.
+- Stock price range analysis.
+- Histogram-based data analysis.
+
+Time Complexity
+
+O(n)
+
+Each bar is pushed onto the stack once and popped at most once, so the total work is linear.
+
+Space Complexity
+
+O(n)
+
+The stack can store up to n indices in the worst case.

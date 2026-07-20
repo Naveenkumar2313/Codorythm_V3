@@ -1,0 +1,52 @@
+Aim
+
+The aim of the Maximum Size Subarray Sum Equals K algorithm is to determine the longest contiguous subarray whose sum is exactly equal to a given target value K. The algorithm efficiently uses prefix sums and a hash map to identify valid subarrays in linear time.
+
+Theory
+
+Definition
+
+The Maximum Size Subarray Sum Equals K problem involves finding the length of the longest contiguous subarray whose elements add up to a specified target value K. Instead of checking every possible subarray, the algorithm stores prefix sums and their earliest occurrences to quickly determine whether a valid subarray exists.
+
+Working Principle
+
+The algorithm works as follows:
+
+1. Initialize a hash map to store the earliest occurrence of each prefix sum.
+2. Traverse the array while maintaining the cumulative prefix sum.
+3. If the current prefix sum equals K, update the maximum length.
+4. Check whether (current prefix sum − K) exists in the hash map.
+5. If it exists, compute the subarray length and update the maximum length if necessary.
+6. Store the current prefix sum only if it has not appeared before, ensuring the longest possible subarray is considered.
+
+This approach guarantees that each element is processed only once, making the algorithm highly efficient.
+
+Precondition
+
+- The input array should contain valid integers.
+- The target value K can be positive, negative, or zero.
+- The array may contain positive numbers, negative numbers, and zeros.
+
+Advantages
+
+- Solves the problem in linear time.
+- Works efficiently with both positive and negative numbers.
+- Uses prefix sums and hashing for fast lookups.
+- Avoids checking every possible subarray.
+
+Disadvantages
+
+- Requires additional memory for the hash map.
+- Stores prefix sums, increasing auxiliary space usage.
+
+Time Complexity
+
+O(n)
+
+Each element is processed exactly once.
+
+Space Complexity
+
+O(n)
+
+A hash map storing prefix sums may contain up to n entries.

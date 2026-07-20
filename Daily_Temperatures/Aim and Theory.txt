@@ -1,0 +1,92 @@
+Aim
+
+The aim of the Daily Temperatures algorithm is to find, for each day, how many days must pass before a warmer temperature occurs. If no warmer day appears in the future, the answer for that day is 0. The algorithm uses a monotonic stack to solve this efficiently in linear time.
+
+Definition
+
+For a temperature reading temperatures[i], the required answer is the smallest positive difference j - i such that j > i and temperatures[j] > temperatures[i]. If no such index j exists, the answer is 0.
+
+Theory
+
+A simple solution compares each day with every later day until it finds a warmer temperature. This is easy to understand, but it may take O(n^2) time when many days must scan far into the future.
+
+The optimized approach keeps a stack of useful future day indices. While processing from right to left, the stack stores indices of days that may become the next warmer day for earlier readings. If a future day has a temperature less than or equal to the current day, it cannot help the current day because it is not warmer. It also cannot help any earlier day that sees the current day first as an equal or warmer blocking candidate, so it can be removed.
+
+After removing all colder or equal future days, the top index of the stack is the nearest day to the right with a strictly warmer temperature. The difference between that index and the current index gives the number of waiting days.
+
+Working Principle
+
+The algorithm works by processing the temperature array from right to left.
+
+For each day:
+
+1. Remove indices from the stack while their temperatures are less than or equal to the current temperature.
+2. If the stack is empty, no warmer day exists, so store 0.
+3. If the stack is not empty, the top index is the next warmer day, so store the index difference.
+4. Push the current index onto the stack because it may help earlier days.
+
+Algorithm Steps
+
+1. Create an answer array filled with 0.
+2. Create an empty stack to store indices.
+3. Traverse the temperatures array from the last index to the first index.
+4. While the stack is not empty and the temperature at the stack top is less than or equal to the current temperature, pop the stack.
+5. If the stack is not empty, set answer[i] to stack top - i.
+6. Push the current index onto the stack.
+7. Return the answer array.
+
+Example
+
+Input:
+
+temperatures = [73, 74, 75, 71, 69, 72, 76, 73]
+
+Processing from right to left:
+
+- Day 7 has no warmer day after it, so answer is 0.
+- Day 6 has no warmer day after it, so answer is 0.
+- Day 5 with temperature 72 waits 1 day for temperature 76.
+- Day 4 with temperature 69 waits 1 day for temperature 72.
+- Day 3 with temperature 71 waits 2 days for temperature 72.
+- Day 2 with temperature 75 waits 4 days for temperature 76.
+- Day 1 with temperature 74 waits 1 day for temperature 75.
+- Day 0 with temperature 73 waits 1 day for temperature 74.
+
+Output:
+
+[1, 1, 4, 2, 1, 1, 0, 0]
+
+Advantages
+
+- Runs in O(n) time.
+- Avoids repeated scanning of future days.
+- Works well for large temperature logs.
+- Handles equal temperatures correctly because equal is not warmer.
+- Builds understanding for many next-greater-index problems.
+
+Disadvantages
+
+- Requires extra space for the stack.
+- The right-to-left traversal may feel less direct at first.
+- The comparison must be strict; equal temperatures must be removed.
+
+Applications
+
+- Weather forecast analysis.
+- Sensor readings that need the next higher measurement.
+- Server temperature monitoring.
+- Greenhouse and storage temperature tracking.
+- Stock or demand series where the wait until a higher value is needed.
+- Alert systems that depend on the next future increase.
+
+Time Complexity
+
+O(n)
+
+Each index is pushed onto the stack once and popped from the stack at most once.
+
+Space Complexity
+
+O(n)
+
+The stack can store up to n indices in the worst case, and the output array stores n results.

@@ -1,0 +1,55 @@
+Aim
+
+The aim of the Difference Array algorithm is to efficiently perform multiple range update operations on an array. Instead of updating every element within a range individually, the algorithm records only the changes at the range boundaries and reconstructs the final array using prefix sums. This significantly reduces the time required for multiple range updates.
+
+Theory
+
+Definition
+
+A Difference Array is an auxiliary array used to optimize range update operations. Each update modifies only the starting and ending boundaries of the specified range. After all updates are applied, a prefix sum traversal reconstructs the final updated array.
+
+Working Principle
+
+The algorithm works as follows:
+
+1. Create a difference array initialized with zeros or derived from the original array.
+2. For every update [L, R] with value X:
+   - Add X at index L.
+   - Subtract X at index R + 1 (if it exists).
+3. After processing all updates, compute the prefix sum of the difference array.
+4. The prefix sums represent the final updated array after applying every range update.
+
+This approach avoids updating every element within each range, making it highly efficient for problems involving many range modifications.
+
+Precondition
+
+- The input array should contain valid integer values.
+- Each update must satisfy 0 ≤ L ≤ R < n.
+- The update value can be positive, negative, or zero.
+
+Advantages
+
+- Performs range updates efficiently.
+- Reduces multiple range updates from O(n × q) to O(n + q).
+- Simple implementation using prefix sums.
+- Suitable for handling a large number of update operations.
+
+Disadvantages
+
+- Does not efficiently support range queries without additional preprocessing.
+- The final updated array is obtained only after computing prefix sums.
+- Less suitable when updates and queries are interleaved frequently.
+
+Time Complexity
+
+Range Update: O(1) per update
+
+Final Reconstruction: O(n)
+
+Overall Complexity: O(n + q), where q is the number of updates.
+
+Space Complexity
+
+O(n)
+
+An additional difference array of size n is required.
