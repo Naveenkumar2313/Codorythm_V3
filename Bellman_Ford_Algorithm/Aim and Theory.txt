@@ -1,0 +1,64 @@
+Aim: To implement and understand the Bellman-Ford Algorithm for finding the shortest paths from a single source vertex to all other vertices in a weighted directed graph, including graphs with negative edge weights.
+
+Definition: The Bellman-Ford Algorithm is a single-source shortest path algorithm that computes the shortest distance from a source vertex to all other vertices in a weighted graph. Unlike Dijkstra's algorithm, it can handle graphs with negative edge weights and can detect the presence of negative weight cycles.
+
+Theory: The algorithm is based on the principle of relaxation. For a graph with V vertices, the shortest path between any two vertices can have at most V-1 edges. Therefore, if we relax all edges in the graph V-1 times, we are guaranteed to find the shortest paths from the source to all other vertices, provided there are no negative weight cycles. If we relax the edges one more time (the V-th time) and any distance still decreases, it indicates the presence of a negative weight cycle.
+
+Working Principle:
+1. Initialization:
+   - Set the distance to the source vertex to 0.
+   - Set the distance to all other vertices to infinity (∞).
+2. Relaxation:
+   - Repeat the following process V-1 times:
+     a. For each edge (u, v) with weight w:
+        i. If distance[u] + w < distance[v], then update distance[v] = distance[u] + w.
+3. Negative Cycle Detection:
+   - For each edge (u, v) with weight w:
+     a. If distance[u] + w < distance[v], then a negative weight cycle exists in the graph.
+
+Advantages:
+- Handles negative edge weights, which Dijkstra's algorithm cannot.
+- Capable of detecting negative weight cycles.
+- Simple to implement.
+
+Disadvantages:
+- Higher time complexity O(V * E) compared to Dijkstra's O(E log V).
+- Slower performance on large graphs.
+
+Applications:
+- Routing Protocols: The Distance Vector Routing protocol (like RIP - Routing Information Protocol) uses a distributed version of the Bellman-Ford algorithm.
+- Network Analysis: Finding shortest paths in networks where "costs" might be negative (e.g., gains/profits).
+- Finance: Arbitrage detection in currency exchange markets (where logarithms of exchange rates can create negative cycles).
+
+Real Life Applications:
+- Currency Arbitrage: Detecting cycles of currency exchanges that result in a net gain.
+- Logistics: Optimizing routes where some segments provide subsidies or rewards (negative costs).
+- GPS Navigation (Special Cases): Handling specific route penalties or bonuses.
+
+Time Complexity: O(V * E), where V is the number of vertices and E is the number of edges. The algorithm relaxes all E edges V-1 times.
+
+Space Complexity: O(V), as it requires an array of size V to store the shortest distances from the source.
+
+Stable / Not Stable: N/A. Stability is a property of sorting algorithms; Bellman-Ford is a graph pathfinding algorithm.
+
+In-place / Not In-place: Not In-place. It requires O(V) extra space for the distance array.
+
+Prerequisites:
+- Understanding of Weighted Directed Graphs.
+- Concept of Edge Relaxation.
+- Basic knowledge of Single-Source Shortest Path problems.
+
+Common Mistakes:
+- Forgetting to handle the initialization of the distance array with infinity.
+- Not running the V-th iteration to check for negative cycles.
+- Attempting to use the algorithm on undirected graphs with negative edges (which are essentially negative cycles).
+
+When to Use:
+- When the graph contains negative edge weights.
+- When you need to detect if a negative weight cycle exists.
+
+When Not to Use:
+- When all edge weights are guaranteed to be non-negative (Dijkstra's is much faster).
+- When the graph is extremely large and O(V * E) is too slow.
+
+For more information visit Codorythm platform.

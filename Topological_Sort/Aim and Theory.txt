@@ -1,0 +1,71 @@
+Aim: To implement and understand the Topological Sort algorithm using both Kahn's Algorithm (BFS-based) and Depth First Search (DFS-based) approaches for Directed Acyclic Graphs (DAGs).
+
+Definition: Topological Sort of a Directed Acyclic Graph (DAG) is a linear ordering of vertices such that for every directed edge (u, v), vertex u comes before v in the ordering.
+
+Theory: Topological sorting is applicable only to Directed Acyclic Graphs (DAGs). If a graph contains a cycle, a topological sort is impossible because there is no starting point that doesn't depend on another vertex in the cycle. In a DAG, there is always at least one vertex with an in-degree of 0, which serves as a starting point for the sort.
+
+Working Principle:
+1. Kahn's Algorithm (BFS):
+   - Calculate the in-degree of every vertex.
+   - Initialize a queue with all vertices having an in-degree of 0.
+   - While the queue is not empty:
+     a. Remove a vertex u from the queue and add it to the topological order.
+     b. For every neighbor v of u, decrement its in-degree.
+     c. If the in-degree of v becomes 0, add it to the queue.
+   - If the number of vertices in the topological order is less than the total vertices, the graph contains a cycle.
+
+2. DFS-based Approach:
+   - Initialize a boolean visited array and a stack.
+   - For each unvisited vertex, call a recursive DFS function.
+   - In the DFS function:
+     a. Mark the current vertex as visited.
+     b. For each unvisited neighbor, recursively call the DFS function.
+     c. Once all neighbors are visited, push the current vertex onto the stack.
+   - After all vertices are processed, the topological order is the reverse of the stack (or pop from stack).
+
+Advantages:
+- Efficiently resolves dependencies between tasks.
+- Linear time complexity O(V + E).
+- Kahn's algorithm can be used to detect cycles in a directed graph.
+
+Disadvantages:
+- Only works on Directed Acyclic Graphs (DAGs).
+- Not applicable to undirected graphs or graphs with cycles.
+
+Applications:
+- Task Scheduling: Determining the order of tasks with dependencies.
+- Instruction Scheduling: Optimizing the order of execution in compilers.
+- Data Serialization: Determining the order to serialize objects.
+
+Real Life Applications:
+- Course Prerequisites: Planning the sequence of courses to take in a degree program where some courses require others as prerequisites.
+- Software Build Systems: Tools like Make or Gradle use topological sort to determine the order of compiling modules based on dependencies.
+- Package Managers: Determining the order of installation for libraries (e.g., npm, pip) so that dependencies are installed before the packages that rely on them.
+
+Time Complexity: O(V + E), where V is the number of vertices and E is the number of edges, as each vertex and edge is visited exactly once.
+
+Space Complexity: O(V), used for the in-degree array, queue/stack, and the resulting topological order.
+
+Stable / Not Stable: N/A. Stability is a property of sorting algorithms for linear sequences (like QuickSort or MergeSort) to maintain the relative order of equal elements. Topological sort is a graph traversal problem.
+
+In-place / Not In-place: Not In-place. It requires extra space (O(V)) for the queue/stack and the output list.
+
+Prerequisites:
+- Basic understanding of Directed Graphs.
+- Knowledge of BFS (Breadth-First Search) and DFS (Depth-First Search).
+- Concept of In-degree (number of incoming edges to a vertex).
+
+Common Mistakes:
+- Attempting to perform topological sort on a graph with cycles.
+- Forgetting to handle disconnected components in the DFS approach.
+- Mistaking the DFS finish order for the topological order (it must be reversed).
+
+When to Use:
+- When you have a set of tasks with dependencies and need to find a valid sequence of execution.
+- When you need to detect if a directed graph contains a cycle.
+
+When Not to Use:
+- When the graph is undirected.
+- When the graph is known to contain cycles (unless the goal is cycle detection).
+
+For more information visit Codorythm platform.

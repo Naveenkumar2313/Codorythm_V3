@@ -1,0 +1,76 @@
+Aim: To implement and understand Tarjan's Algorithm for finding Bridges and Articulation Points in an undirected graph.
+
+Definition:
+1. Articulation Point: A vertex in an undirected graph which, when removed (along with its associated edges), increases the number of connected components in the graph.
+2. Bridge: An edge in an undirected graph which, when removed, increases the number of connected components.
+
+Theory: Tarjan's algorithm uses a single Depth-First Search (DFS) traversal to identify these critical components. It relies on the concept of 'discovery time' and 'low-link value'.
+- Discovery Time (disc): The time at which a vertex was first visited during DFS.
+- Low-link Value (low): The lowest discovery time reachable from the vertex (including itself) in the DFS tree, possibly using a back-edge.
+
+A vertex 'u' is an articulation point if:
+1. 'u' is the root of the DFS tree and has at least two children.
+2. 'u' is not the root and has a child 'v' such that no back-edge exists from 'v' or any of its descendants to 'u' or any of 'u's ancestors (i.e., low[v] >= disc[u]).
+
+An edge (u, v) is a bridge if:
+- 'v' is a child of 'u' in the DFS tree and there is no back-edge from 'v' or any of its descendants to 'u' or any of 'u's ancestors (i.e., low[v] > disc[u]).
+
+Working Principle:
+1. Initialize `disc` and `low` arrays with -1, and a `visited` array as false.
+2. Start a DFS traversal from an unvisited vertex.
+3. For every vertex `u`:
+   a. Set `disc[u] = low[u] = ++timer`.
+   b. For every neighbor `v` of `u`:
+      i. If `v` is the parent of `u`, skip it.
+      ii. If `v` is already visited, it's a back-edge. Update `low[u] = min(low[u], disc[v])`.
+      iii. If `v` is not visited:
+         - Recursively call DFS for `v`.
+         - Upon return, update `low[u] = min(low[u], low[v])`.
+         - Check if (u, v) is a bridge: `if low[v] > disc[u]`, then (u, v) is a bridge.
+         - Check if `u` is an articulation point: `if u is not root and low[v] >= disc[u]`, or `u is root and has > 1 children`.
+
+Advantages:
+- Extremely efficient: finds both bridges and articulation points in a single DFS pass.
+- Linear time complexity O(V + E).
+
+Disadvantages:
+- More complex to implement than simple connectivity checks.
+- Requires careful handling of the root node in the DFS tree.
+
+Applications:
+- Network Reliability: Identifying critical nodes (servers) or links (cables) whose failure would disconnect the network.
+- Social Network Analysis: Finding "bottleneck" individuals who connect different social groups.
+- Software Engineering: Identifying critical modules in a dependency graph.
+
+Real Life Applications:
+- Power Grid Analysis: Finding critical power stations or transmission lines that could cause widespread outages if they fail.
+- Traffic Management: Identifying critical bridges or roads that, if blocked, would isolate parts of a city.
+- Communication Systems: Ensuring redundancy in a network by identifying and adding edges to eliminate bridges.
+
+Time Complexity: O(V + E), where V is the number of vertices and E is the number of edges, as it is a modified DFS.
+
+Space Complexity: O(V), used for the `disc`, `low`, `parent`, and `visited` arrays, as well as the recursion stack.
+
+Stable / Not Stable: N/A. Stability is a property of sorting algorithms.
+
+In-place / Not In-place: Not In-place. It requires O(V) extra space for tracking discovery and low-link values.
+
+Prerequisites:
+- Strong understanding of Undirected Graphs.
+- Proficiency in Depth-First Search (DFS).
+- Understanding of DFS Tree concepts (Tree edges vs Back-edges).
+
+Common Mistakes:
+- Updating `low[u]` with `low[v]` for back-edges instead of `disc[v]`.
+- Forgetting to treat the root node separately when identifying articulation points.
+- Not handling disconnected components by looping through all vertices.
+
+When to Use:
+- When you need to find critical points of failure in a network.
+- When you need to determine if a graph is "2-edge-connected" (no bridges) or "2-vertex-connected" (no articulation points).
+
+When Not to Use:
+- When the graph is directed (Tarjan's for Strongly Connected Components is a different algorithm, though related).
+- When a simple connectivity check is sufficient.
+
+For more information visit Codorythm platform.

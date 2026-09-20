@@ -1,0 +1,74 @@
+Aim: To implement and understand Prim's Algorithm for finding the Minimum Spanning Tree (MST) of a connected, weighted, undirected graph.
+
+Definition: Prim's Algorithm is a greedy algorithm that finds a minimum spanning tree for a weighted undirected graph. This tree will span all the vertices with the minimum possible total edge weight.
+
+Theory: A Minimum Spanning Tree (MST) is a subset of the edges of a connected, edge-weighted undirected graph that connects all the vertices together, without any cycles and with the minimum possible total edge weight. Prim's algorithm grows the MST one vertex at a time, starting from an arbitrary root vertex. At each step, it adds the cheapest possible connection from the tree to a vertex not yet in the tree.
+
+Working Principle:
+1. Initialization:
+   - Create a set `mstSet` to keep track of vertices already included in the MST.
+   - Assign a key value to all vertices in the graph. Initialize all keys as INFINITY, except the source vertex which is initialized to 0.
+   - Use a priority queue (min-heap) to store vertices and their current key values.
+2. Iteration:
+   - While the priority queue is not empty:
+     a. Extract the vertex `u` with the minimum key value from the priority queue.
+     b. Include `u` in the `mstSet`.
+     c. For every adjacent vertex `v` of `u`:
+        i. If `v` is not in `mstSet` and the weight of edge (u, v) is less than the current key value of `v`:
+           - Update the key value of `v` to the weight of edge (u, v).
+           - Update the parent of `v` to be `u`.
+           - Update `v` in the priority queue.
+3. Termination:
+   - The process continues until all vertices are included in the `mstSet`. The edges formed by the parent pointers constitute the MST.
+
+Advantages:
+- Very efficient for dense graphs when implemented with an adjacency matrix or Fibonacci heap.
+- Guaranteed to find the MST for any connected weighted undirected graph.
+- Simpler to understand as it grows a single connected component.
+
+Disadvantages:
+- More complex to implement than Kruskal's algorithm for sparse graphs.
+- Requires a priority queue for optimal performance.
+- Not applicable to disconnected graphs (will only find the MST of the connected component containing the start node).
+
+Applications:
+- Network Design: Laying out cables, pipelines, or telephone wires with minimum total length to connect all points.
+- Cluster Analysis: Used in some hierarchical clustering algorithms to find the MST of data points.
+- Circuit Design: Minimizing the total wire length in VLSI design.
+
+Real Life Applications:
+- Electrical Grid Layout: Connecting multiple cities to a power plant with minimum cabling.
+- Computer Networks: Designing a broadcast network where every node must receive information with minimum cost.
+- Water Pipeline Distribution: Planning the layout of water pipes to connect all houses in a neighborhood with the least amount of piping.
+
+Time Complexity:
+- O(V^2) using an adjacency matrix.
+- O(E log V) using an adjacency list and a binary heap.
+- O(E + V log V) using a Fibonacci heap.
+
+Space Complexity: O(V + E) to store the adjacency list and the priority queue.
+
+Stable / Not Stable: N/A. Stability is a property of sorting algorithms; Prim's is a graph algorithm.
+
+In-place / Not In-place: Not In-place. It requires extra space for the key array, parent array, and the priority queue.
+
+Prerequisites:
+- Understanding of Undirected Weighted Graphs.
+- Knowledge of Spanning Trees.
+- Concept of Greedy Algorithms.
+- Familiarity with Priority Queues (Min-Heaps).
+
+Common Mistakes:
+- Using Prim's algorithm on directed graphs (MST is defined for undirected graphs).
+- Forgetting to update the priority queue when a shorter edge to a vertex is found.
+- Not handling disconnected graphs (Prim's only works for one connected component).
+
+When to Use:
+- When the graph is dense (lots of edges).
+- When you need to grow the MST from a specific starting point.
+
+When Not to Use:
+- When the graph is very sparse (Kruskal's algorithm is often more efficient).
+- When the graph is disconnected (use Kruskal's or run Prim's for each component).
+
+For more information visit Codorythm platform.

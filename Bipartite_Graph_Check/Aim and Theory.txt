@@ -1,0 +1,76 @@
+Aim: To implement and understand the algorithm for checking if a graph is Bipartite using Graph Coloring (BFS and DFS).
+
+Definition: A graph is said to be Bipartite if its vertices can be divided into two independent sets, U and V, such that every edge (u, v) connects a vertex from U to one from V. In other words, no two vertices within the same set are adjacent.
+
+Theory: A bipartite graph is a graph that can be colored using only two colors such that no two adjacent vertices share the same color. A fundamental theorem in graph theory states that a graph is bipartite if and only if it contains no odd-length cycles. If a graph has a cycle of odd length (e.g., a triangle), it is impossible to color it with only two colors.
+
+Working Principle:
+The most common approach to check for bipartiteness is using a 2-coloring method via Breadth-First Search (BFS) or Depth-First Search (DFS).
+
+1. BFS-based Approach:
+   - Initialize a color array with -1 (indicating uncolored) for all vertices.
+   - For each unvisited vertex (to handle disconnected components):
+     a. Assign color 0 to the starting vertex and add it to a queue.
+     b. While the queue is not empty:
+        i. Remove vertex u from the queue.
+        ii. For each neighbor v of u:
+           - If v is uncolored, assign it the opposite color of u (1 - color[u]) and add it to the queue.
+           - If v is already colored and has the same color as u, the graph is NOT bipartite.
+   - If all vertices are processed without conflict, the graph is bipartite.
+
+2. DFS-based Approach:
+   - Initialize a color array with -1 for all vertices.
+   - For each unvisited vertex:
+     a. Call a recursive DFS function starting with color 0.
+     b. In the DFS function:
+        i. Mark the current vertex with the given color.
+        ii. For each neighbor v:
+           - If v is uncolored, recursively call DFS with the opposite color. If it returns false, return false.
+           - If v is already colored and has the same color as the current vertex, return false.
+   - If all recursive calls return true, the graph is bipartite.
+
+Advantages:
+- Efficiently determines if a graph can be split into two independent sets.
+- Linear time complexity O(V + E).
+- Simple implementation using standard traversal techniques.
+
+Disadvantages:
+- Only determines if the graph is bipartite; it doesn't solve more complex coloring problems (like 3-coloring, which is NP-Complete).
+
+Applications:
+- Matching Problems: Bipartite matching is used in assigning tasks to workers or students to projects.
+- Scheduling: Modeling conflicts between events where two events cannot happen simultaneously.
+- Social Network Analysis: Modeling relationships between two different groups (e.g., users and the products they bought).
+
+Real Life Applications:
+- Job Assignment: A bipartite graph can model applicants (Set U) and job openings (Set V), where edges represent qualifications.
+- Dating Apps: Modeling preferences between two distinct gender groups.
+- Course Scheduling: Checking if classes can be split into two time slots without conflict.
+
+Time Complexity: O(V + E), where V is the number of vertices and E is the number of edges, as each vertex and edge is visited once.
+
+Space Complexity: O(V) for the color array and the queue/stack used during traversal.
+
+Stable / Not Stable: N/A. Stability is a property of sorting algorithms.
+
+In-place / Not In-place: Not In-place. It requires O(V) extra space for coloring and traversal.
+
+Prerequisites:
+- Basic understanding of Undirected and Directed Graphs.
+- Knowledge of BFS (Breadth-First Search) and DFS (Depth-First Search).
+- Concept of Graph Coloring.
+
+Common Mistakes:
+- Forgetting to handle disconnected components (only running BFS/DFS from one node).
+- Confusing bipartite graphs with complete bipartite graphs (where every node in U is connected to every node in V).
+- Applying the algorithm to graphs where the "two sets" are not predefined and assuming only one possible coloring.
+
+When to Use:
+- When you need to check if a graph can be partitioned into two independent sets.
+- When looking for odd-length cycles in a graph.
+
+When Not to Use:
+- When the problem requires more than two colors (k-colorability).
+- When the graph is known to be a tree (all trees are bipartite).
+
+For more information visit Codorythm platform.
