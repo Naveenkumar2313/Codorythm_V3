@@ -1,0 +1,56 @@
+Aim :
+The aim of this visualization is to help learners understand how the Longest Increasing Subsequence (LIS) algorithm efficiently finds the longest strictly increasing subsequence using the Binary Search optimized approach.
+
+This simulator enables users to:
+
+Visualize how each number is processed against the current "tails" array.
+Understand why the tails array stores the smallest possible tail for increasing subsequences of each length.
+Observe how binary search identifies the position where each number should be placed.
+Track how the tails array grows or gets updated during the simulation.
+Interactively control each processing step and monitor subsequence updates.
+Receive audio feedback and live status updates during the simulation.
+Learn how binary search reduces the LIS computation from O(n²) to O(n log n).
+
+This visualization is ideal for learners exploring dynamic programming optimization, greedy techniques, binary search, and subsequence-based algorithms.
+
+Theory :
+Definition: Longest Increasing Subsequence (LIS) is an algorithm that finds the longest subsequence of an array in which every element is strictly greater than the previous element, while preserving the original order.
+
+Working Principle:
+The optimized algorithm maintains a "tails" array:
+- tails[i] stores the smallest possible ending value of an increasing subsequence of length i + 1.
+- For every incoming number, binary search is used to find the first position in tails whose value is greater than or equal to that number.
+- If such a position exists, that value is replaced with the current number.
+- If no such position exists, the number is appended to tails, increasing the length of the LIS.
+
+Whenever a new number is processed:
+
+The algorithm performs a binary search on the tails array.
+If the number can improve an existing subsequence length, the corresponding tail is replaced.
+If the number is greater than every current tail, it extends the tails array.
+The length of the tails array at the end is the length of the LIS.
+
+Important Note:
+The tails array itself is not necessarily the actual LIS. It stores the smallest possible tail for each subsequence length, which allows future elements to extend subsequences efficiently.
+
+Precondition:
+The input is a finite sequence of comparable numbers.
+The relative order of elements in the original sequence must be preserved.
+Elements do not need to be contiguous.
+
+Advantages:
+Efficiently computes LIS length in O(n log n) time.
+Uses binary search instead of scanning all previous elements.
+Maintains a compact tails array.
+Suitable for large input arrays.
+
+Disadvantages:
+The tails array alone does not directly represent the actual LIS.
+Reconstructing the sequence requires additional predecessor and index information.
+The binary search implementation is more complex than the basic O(n²) dynamic programming approach.
+
+Time Complexity:
+Processing each element: O(log n)
+Overall: O(n log n)
+
+Space Complexity: O(n), for the tails array and auxiliary information when reconstruction is required.

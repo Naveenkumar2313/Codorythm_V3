@@ -1,0 +1,35 @@
+Aim :- 
+
+The aim of this visualization is to help learners understand the working of the Partition Equal Subset Sum algorithm using intuitive animations and interactive control.
+
+This simulator enables users to:
+
+Visualize how elements are selected to form a target subset sum.
+Understand how the total sum is divided into two equal subset sums.
+Interactively trace the dynamic programming states and subset formation.
+Identify whether an array can be divided into two subsets having equal sums.
+Learn how dynamic programming efficiently solves the subset partition problem.
+
+This is ideal for learners exploring dynamic programming, subset-sum problems, and optimization techniques involving partitioning of arrays.
+
+Theory:- 
+
+Definition: Partition Equal Subset Sum is a dynamic programming problem used to determine whether a given array of positive integers can be divided into two subsets such that both subsets have the same total sum.
+
+Working Principle: First, the total sum of all elements is calculated. If the total sum is odd, equal partitioning is impossible. If the sum is even, the problem is reduced to finding whether a subset exists whose sum is exactly half of the total sum. Dynamic programming is then used to determine whether this target sum can be formed.
+
+Precondition: The input array should contain positive integers. An equal partition is possible only when the total sum of the elements is even.
+
+Advantages: 
+
+Efficiently solves equal partition problems using dynamic programming.
+Can determine whether a required subset sum is possible without explicitly generating all subsets.
+
+Disadvantages:
+
+Requires additional memory for storing dynamic programming states.
+Time and space requirements increase as the total sum of the elements becomes larger.
+
+Time Complexity: O(n * S), where n is the number of elements and S is the total sum of the array.
+
+Space Complexity: O(S), where S is the total sum of the array.

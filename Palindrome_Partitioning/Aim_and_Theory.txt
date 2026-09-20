@@ -1,0 +1,49 @@
+Aim :
+The aim of this visualization is to help learners understand how the Palindrome Partitioning (Minimum Cuts) algorithm efficiently finds the minimum number of cuts required to divide a string into palindromic substrings.
+This simulator enables users to:
+
+Visualize how a string is divided into different palindromic substrings.
+Understand how palindrome checking is performed for different substrings.
+Observe how dynamic programming stores previously computed palindrome states.
+Track how the minimum number of cuts is updated during the simulation.
+Interactively control each partitioning step and monitor the optimal cut path.
+Receive audio feedback and live status updates during the simulation.
+Learn how dynamic programming avoids repeated computation of overlapping subproblems.
+This visualization is ideal for learners exploring dynamic programming, string algorithms, palindrome detection, and optimization problems.
+
+Theory :
+Definition: Palindrome Partitioning is a dynamic programming problem that finds the minimum number of cuts required to partition a string into substrings where every substring is a palindrome.
+Working Principle:
+The algorithm maintains a palindrome table and a minimum-cut array:
+- pal[i][j] indicates whether the substring from index i to j is a palindrome.
+- dp[i] stores the minimum number of partitions required for the prefix ending at index i.
+- The palindrome table is computed by comparing the characters at both ends of a substring and checking whether the inner substring is also a palindrome.
+- The minimum-cut calculation uses the palindrome information to determine the optimal partition.
+Whenever a substring is processed:
+The algorithm checks whether the substring is a palindrome.
+If the substring is a palindrome, it can be considered as one complete partition.
+The minimum partition value is updated using previously calculated results.
+Finally, the minimum number of cuts is obtained by subtracting one from the minimum number of partitions.
+Important Note:
+A palindrome can be identified when the characters at both ends are equal and the substring between them is also a palindrome. A single character and an empty substring are considered palindromes for the purpose of dynamic programming.
+Precondition:
+The input must be a valid string.
+The string should contain characters that can be compared for equality.
+The original order of characters must be preserved.
+Each resulting partition must be a palindrome.
+Advantages:
+Finds the minimum number of cuts required for palindrome partitioning.
+Uses dynamic programming to avoid repeated palindrome calculations.
+Can efficiently handle overlapping subproblems.
+Provides a systematic way to reconstruct an optimal palindrome partition.
+Useful in string processing and optimization-based applications.
+Disadvantages:
+Requires additional memory for storing the palindrome table.
+The standard dynamic programming approach requires O(n²) time.
+The complete palindrome table requires O(n²) space.
+Reconstructing the actual partition requires additional predecessor information.
+Time Complexity:
+Palindrome Table Construction: O(n²)
+Minimum Cut Calculation: O(n²)
+Overall: O(n²)
+Space Complexity: O(n²), for the palindrome table and dynamic programming arrays.

@@ -1,0 +1,49 @@
+Aim and Theory
+
+Algorithm: Traveling Salesman Problem using Bitmask Dynamic Programming
+
+Aim :-
+
+The aim of this visualization is to help learners understand the working of the Traveling Salesman Problem using Bitmask Dynamic Programming through intuitive animations and interactive control.
+
+This simulator enables users to:
+
+Visualize how cities are visited and represented using bitmasks.
+Understand how dynamic programming stores the minimum cost for different visited-city states.
+Interactively trace the selection of the next city and the corresponding travel cost.
+Identify how the tour returns to the starting city after visiting all cities.
+Learn how bitmasking and dynamic programming reduce repeated calculations in the TSP problem.
+
+This is ideal for learners exploring dynamic programming, bitmasking, graph optimization, and shortest Hamiltonian cycle problems.
+
+Theory:-
+
+Definition: The Traveling Salesman Problem (TSP) is an optimization problem in which a salesman must visit every city exactly once and return to the starting city while minimizing the total travel cost.
+
+Working Principle: Bitmask Dynamic Programming represents the set of visited cities using a binary mask. Each bit indicates whether a city has been visited. The DP table stores the minimum cost of reaching a particular city after visiting a specific set of cities. For every state, unvisited cities are considered as possible next destinations and the minimum cost is updated.
+
+Bitmask Representation: For n cities, a mask of n bits is used. If the bit corresponding to a city is set to 1, that city has already been visited. When all cities are visited, the mask becomes 2ⁿ - 1.
+
+DP State: dp[mask][u] represents the minimum cost of reaching city u after visiting all cities represented by mask.
+
+Transition: From the current city u, an unvisited city v can be selected using:
+
+dp[mask | (1 << v)][v] = min(dp[mask | (1 << v)][v], dp[mask][u] + cost[u][v])
+
+Precondition: The number of cities should be small enough for bitmask dynamic programming, and the travel cost between every required pair of cities should be available.
+
+Advantages:
+
+Efficiently avoids repeated calculations using dynamic programming.
+Uses bitmasks to represent visited-city subsets compactly.
+Provides an exact solution for small instances of TSP.
+
+Disadvantages:
+
+Requires exponential time as the number of cities increases.
+Requires significant memory for storing all bitmask states.
+Not suitable for very large numbers of cities.
+
+Time Complexity: O(n² × 2ⁿ), where n is the number of cities.
+
+Space Complexity: O(n × 2ⁿ), due to the dynamic programming table.

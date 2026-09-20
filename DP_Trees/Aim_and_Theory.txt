@@ -1,0 +1,65 @@
+Aim :-
+
+The aim of this visualization is to help learners understand how Dynamic Programming on Trees solves the House Robber III / Maximum Reward problem by calculating the optimal rob/skip decision for every subtree and combining these results to obtain the global maximum.
+
+This simulator enables users to:
+
+Visualize the binary tree and its subtrees.
+Observe how each subtree calculates a rob value and a skip value.
+Understand how parent-child restrictions affect the selection of nodes.
+Interactively trace the Dynamic Programming states of each node.
+Observe how the rob/skip pair is passed upward from child nodes to their parent.
+Understand how the root combines the results of its subtrees to determine the global optimum.
+Learn how Tree DP efficiently solves optimization problems on hierarchical structures.
+
+This visualization is ideal for learners exploring Dynamic Programming on Trees, binary tree optimization, subtree-based state computation, and interview-oriented problems such as House Robber III.
+
+
+Theory :-
+
+Definition:House Robber III / Maximum Reward on a Tree is a Dynamic Programming problem where the objective is to select a set of nodes with maximum total value such that no selected node is directly connected to another selected node. The problem is solved by computing two states for every subtree: the maximum value when the current node is skipped and the maximum value when the current node is robbed or selected.
+
+Working Principle:The algorithm performs Dynamic Programming on the tree using a rob/skip pair for every node. Each subtree returns its two computed values to its parent, and the parent combines these values to determine the optimal result for its own subtree.
+
+Skip State:If the current node is skipped, either the left child or right child may be selected or skipped. Therefore, the maximum possible value from each child subtree is considered.
+
+Rob State:If the current node is selected, its immediate children cannot be selected. Therefore, only the skip value of each child subtree is added to the current node's value.
+
+For a node u:
+
+skip[u] = max(skip[left], rob[left]) + max(skip[right], rob[right])
+
+rob[u] = value[u] + skip[left] + skip[right]
+
+The final answer is:
+
+max(skip[root], rob[root])
+
+This allows every subtree to return a compact rob/skip pair upward, and the root combines these values to obtain the global optimal solution.
+
+Precondition:
+The input must represent a valid binary tree.
+Each node must contain a value representing its reward or amount.
+The tree may be empty, balanced, skewed, or incomplete.
+Adjacent parent and child nodes cannot both be selected.
+
+Advantages
+Efficiently solves maximum-selection problems on hierarchical tree structures.
+Uses only two Dynamic Programming states for each node.
+Avoids repeatedly solving the same subtree problems.
+Demonstrates the practical use of bottom-up Tree DP.
+Works for balanced as well as highly skewed binary trees.
+The rob/skip state makes the parent-child restriction easy to handle.
+
+Disadvantages
+Requires additional memory for storing Dynamic Programming states.
+The tree must be traversed completely to calculate the optimal result.
+The state transition becomes more complex than simple tree traversal.
+For very deep trees, recursive implementations may require additional stack space.
+
+Time Complexity : O(n)
+(Each node is visited exactly once and its rob/skip states are computed in constant time.)
+
+Space Complexity :
+O(n) for storing the tree and Dynamic Programming states.
+O(h) additional space for recursive traversal, where h is the height of the tree.
